@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
         }
         else{
-            echo("Error description: " . mysqli_error($con));
+            echo("Error description: " . mysqli_error($conn));
         }
 
     

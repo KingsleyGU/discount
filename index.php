@@ -2,7 +2,8 @@
 <?php
   require("dbconnection.php");
   $category = 1;
-  $shopQuery = "select * from shopUser where category='$category'";
+  $shopQuery = "select shopUser.*,(select count(*) from subscription where subscription.shopId = shopUser.id) as subNum,(select count(*) from comment where comment.shopId = shopUser.id) as commentNum from shopUser where shopUser.category='$category'";
+  echo $shopQuery;
   $shopResult = mysqli_query($conn,$shopQuery) or die(mysql_error());
   
 

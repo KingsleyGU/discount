@@ -77,6 +77,37 @@
     });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.10.2/validator.min.js" ></script>
+    <script type="text/javascript">
+    function like(e,shopId,actionId) {
+      var selector = this;
+      $(this).hide();
+      e.preventDefault();
+      $.post( "subscribe.php", { userId: <?php echo $_SESSION["userId"];?>, shopId: shopId,actionId:actionId })
+      .done(function(){
+        
+        var follow_like_block = $(selector).parent(".shop-follow-block").find(".follower-block-like");
+        var likesNumber = parseInt(follow_like_block.val());
+        if(actionId==1)
+        {
+          addLike(selector);
+          follow_like_block.val(likesNumber+1);
+        }
+        else{
+          removeLike(selector);
+          follow_like_block.val(likesNumber-1);
+        }
+        
+      })
+      
+    };
+    function addLike(selector)
+    {
+      $(selector).parent(".shop-follow-block").find(".unlike-button").show();
+    }
+    function removeLike(selector){
+      $(selector).parent(".shop-follow-block").find(".like-button").show();
+    }
+  </script>
 </body>
 
 </html>

@@ -50,24 +50,24 @@
                   <div class="location-block">
                      <a href="https://maps.google.com/?q=<?php echo urlencode(utf8_encode($shopRecord->address.", ".$shopRecord->city))?>" class="btn btn-light" target="_blank"><i class="fa fa-map-marker-alt location-icon" aria-hidden="true"></i><?php echo $shopRecord->address." ,".$shopRecord->city;?></a>
                   </div>
-                <p class="desc"><?php echo $shopRecord->description;?></p>
                 <div data-toggle="modal" data-target="#portfolioModal<?php echo $shopRecord->id;?>">
                   <div class="discount-block" style="text-align:center;">
                       <?php 
                       if(isset($_SESSION["email"]))
                       {
                       ?>
-                    <a href="#" class="button alt discount-btn red-btn dicount-modal-button"><i class="fas fa-file-invoice-dollar fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;获取<?php echo $shopRecord->discount;?>%优惠券</a>
+                    <a href="#" class="button alt discount-btn red-btn dicount-modal-button"><i class="fas fa-file-invoice-dollar"></i>获取<?php echo $shopRecord->discount;?>%优惠券</a>
                       <?php 
                       }
                       else
                       {
                       ?>
-                        <a href="login.php" class="button alt discount-btn red-btn dicount-modal-button"><i class="fas fa-file-invoice-dollar fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;获取<?php echo $shopRecord->discount;?>%优惠券</a>
+                        <a href="login.php" class="button alt discount-btn red-btn dicount-modal-button"><i class="fas fa-file-invoice-dollar"></i>获取<?php echo $shopRecord->discount;?>%优惠券</a>
                       <?php
                         }
                       ?>
                   </div>
+
 
                 </div>
 
@@ -102,6 +102,25 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                  <div class="shop-follow-block" >
+                      
+                        <img src="img/like.svg" class="like-image" onclick="like(event,<?php echo $shopRecord->id;?>,1)">
+                      
+                      
+                        <img src="img/liked.svg" class="like-image" onclick="like(event,<?php echo $shopRecord->id;?>,2)">
+                      
+                      <span class="follower-block">
+                        <div class="follower-block-item">
+                          <span class="follower-block-head"><i class="fas fa-comments"></i>:</span>
+                          <span class="follower-block-content follower-block-comment"><?php echo $shopRecord->commentNum;?></span>
+                        </div>
+                        <div class="follower-block-item">
+                          <span class="follower-block-head"><i class="fas fa-heart"></i>:</span>
+                          <span class="follower-block-content follower-block-like"><?php echo $shopRecord->subNum;?></span>
+                        </div>
+                      </span>
+                    
                   </div>
 
               </div>
