@@ -2,7 +2,7 @@
  <?php 
   require("dbconnection.php");
 	$userId = $_SESSION["userId"];
-  	$query = "select coupon.*,shopUser.name as shopName,shopUser.avatar from coupon  left join shopUser on coupon.shopId = shopUser.id where coupon.userId='$userId'";
+  	$query = "select coupon.*,shopUser.name as shopName,shopUser.avatar from coupon  left join shopUser on coupon.shopId = shopUser.id where coupon.userId='$userId' order by coupon.createdDate desc";
 	$couponResult = mysqli_query($conn,$query) or die(mysql_error());
 
   ?>
@@ -16,13 +16,23 @@
 	      <th scope="col">Name</th>
 	      <th scope="col">Date</th>
 	      <th scope="col">Status</th>
-	      <th scope="col">View</th>
+	      <th scope="col">Action</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	  <?php 
 	  		$row =1;
-          while($couponRecord = mysqli_fetch_object($couponResult)) {      
+          while($couponRecord = mysqli_fetch_object($couponResult)) {  
+          	$expired = 0;
+	      $couponDate = date_create($couponRecord->createdDate);
+	      $date_today = new DateTime(date("Y-m-d"));
+	      if($couponDate>$date_today)
+	      {
+	      	$expired = 0;
+	      }
+	      else{
+	      	$expired = 1;
+	      }    
         ?>
 	    <tr>
 
@@ -32,15 +42,15 @@
 	      <td><?php  
 	      $couponDate = date_create($couponRecord->createdDate);
 	      $date_today = new DateTime(date("Y-m-d"));
-	      if($couponDate>$date_today)
+	      if($expired ==1)
 	      {
-	      	echo "valid";
+	      	echo "<span class='badge badge-secondary'>expired</span>";
 	      }
 	      else{
-	      	echo "expired";
+	      	echo "<span class='badge badge-success'>valid</span>";
 	      }
 	      ?></td>
-	      <td><a href="coupon.php?couponId=<?php echo $couponRecord->id;?>">detail</a></td>
+	      <td><a href="coupon.php?couponId=<?php echo $couponRecord->id;?>" class="btn btn-light">VIEW</a></td>
 	    </tr>
         <?php
         	$row = $row +1;
