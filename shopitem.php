@@ -104,11 +104,31 @@
                     </div>
                   </div>
                   <div class="shop-follow-block" >
+                    <?php
+                      if(isset($_SESSION["userId"]))
+                      {
+                        $userId = $_SESSION["userId"];
+                      $followQuery = "select * from subscription where shopId='$shopRecord->id' and userId = '$userId'";
+                      $followResult = mysqli_query($conn,$followQuery) or die(mysql_error());
+                        $followrows = mysqli_num_rows($followResult);
+                        $displayNone = "display:none;"
+                    ?>
+                      <img src="img/like.svg" class="like-image follow-image" onclick="like(this,event,<?php echo $shopRecord->id;?>,1)" style="<?php if($followrows !=0){echo $displayNone;}?>">
+    
                       
-                        <img src="img/like.svg" class="like-image" onclick="like(event,<?php echo $shopRecord->id;?>,1)">
+                        <img src="img/liked.svg" class="like-image unfollow-image" onclick="like(this,event,<?php echo $shopRecord->id;?>,2)" style="<?php if($followrows ==0){echo $displayNone;}?>">
+                    <?php
+                         
+                      }
+                      else{
+                    ?>
+                    <a href="login.php"> 
+                    <img src="img/like.svg" class="like-image follow-image" ></a>
+                    <?php
+                      }
+                    ?>
                       
-                      
-                        <img src="img/liked.svg" class="like-image" onclick="like(event,<?php echo $shopRecord->id;?>,2)">
+
                       
                       <span class="follower-block">
                         <div class="follower-block-item">

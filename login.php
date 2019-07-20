@@ -3,7 +3,7 @@
  unset($_SESSION['name']); 
   unset($_SESSION['email']); 
   unset($_SESSION['phone']); 
-
+unset($_SESSION['userId']); 
  ?>
  <?php include 'user/header.php';?>   
  <?php
