@@ -1,5 +1,1 @@
-<?php
-session_start();
-echo $_SESSION['email'];
-echo session_id();
-?>
+ <?php header("Location: index.php");?>

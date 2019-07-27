@@ -1,12 +1,14 @@
- <?php
- session_start();
- unset($_SESSION['shopName']); 
+<?php
+session_start();
+if(isset($_SESSION['shopName']))
+{
+  unset($_SESSION['shopName']); 
   unset($_SESSION['shopEmail']); 
   unset($_SESSION['shopPhone']); 
   unset($_SESSION['shopId']); 
- ?>
- <?php include 'header.php';?>   
- <?php
+}
+?>
+<?php
 require("../dbconnection.php");
 $errorMessage = "";
 $email = "";
@@ -33,9 +35,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   else{
     $errorMessage = "User name or password is not correct";
   }
-
 }
 ?>
+<?php include 'header.php';?>   
           <section id="login" class="masthead">
             <div class="container login-container" style="padding: 30px 0px;">
               <div class="row justify-content-center" style="width:100%;">

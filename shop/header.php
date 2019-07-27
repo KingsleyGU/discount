@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
- 
-<?php
-session_start();
-?>
 <head>
 
   <meta charset="utf-8">
@@ -28,7 +24,7 @@ session_start();
 <body id="page-top">
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" >
+  <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand logo" href="index.php">
       <img src="../img/coolpang.png" class="logo-img"/>CoolPang</a>

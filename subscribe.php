@@ -9,6 +9,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     {
      $query = "INSERT into `subscription` (userId, shopId,createdDate)
       VALUES ('$userId', '$shopId', '$createdDate')";
+      echo $query."111111";
         $result = mysqli_query($conn,$query);
         if($result){
 
@@ -20,6 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     else{
      $query = "delete from `subscription` where shopId = '$shopId' and userId ='$userId'";
+     echo $query."22222";
         $result = mysqli_query($conn,$query);
         if($result){
             echo "success"; 
@@ -28,9 +30,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo("Error description: " . mysqli_error($conn));
         }        
     }
-
-    
-    
 }
-
 ?>

@@ -11,12 +11,21 @@
       <div class="row">
 
         <?php 
-          while($shopRecord = mysqli_fetch_object($shopResult)) {      
+          $itemRow =0;
+          while($shopRecord = mysqli_fetch_object($shopResult)) {   
+          $itemRow = $itemRow +1;  
         ?>
-        <div class="col-md-4 col-lg-4 ">
-          <div class="shop-item">
+        <div class="col-md-4 col-lg-4 " style="z-index: 20;">
+          <div class="shop-item <?php if($itemRow%2==1){echo 'shop-item-odd';} else{echo 'shop-item-even';};?>">
               <a href="details.php?shopId=<?php echo $shopRecord->id;?>" class="shop-detail-link">
-                 <div class="img-responsive ratio-4-3" style="background-image:url(<?php echo "./shop/shopimage/".$shopRecord->avatar;?>)"></div>
+                  <?php 
+                  $avatar = $shopRecord->avatar;
+                  if(is_null($avatar))
+                  {
+                    $avatar = "panda.png";
+                  }
+                  ?>
+                 <div class="img-responsive ratio-4-3" style="background-image:url(<?php echo "./shop/shopimage/".$avatar;?>)"></div>
                  <h3><?php echo $shopRecord->name;?></h3>
               </a>
               <div class="wrapper" >
@@ -27,18 +36,18 @@
                         while($shopTag = mysqli_fetch_object($shopTagResult)) { 
                   ?>
                   
-                      <span class="btn  alt  tag-button green-tag-button">
+                      <span class="btn  alt  tag-button <?php if($itemRow%2==1){echo 'tag-button-odd';} else{echo 'tag-button-even';};?>">
                       <?php 
-                      if($shopTag->id == 1){
+                      if($shopTag->tagCategory == 1){
                         echo "川菜";
                       }
-                      elseif ($shopTag->id == 2) {
+                      elseif ($shopTag->tagCategory == 2) {
                         echo "粤菜";
                       }
-                      elseif ($shopTag->id == 3) {
+                      elseif ($shopTag->tagCategory == 3) {
                         echo "湘菜";
                       } 
-                      elseif ($shopTag->id == 4) {
+                      elseif ($shopTag->tagCategory == 4) {
                         echo "东北菜";
                       }     
                       ?>
@@ -48,17 +57,37 @@
                       ?>
                   </div>
                   <div class="location-block">
-                     <a href="https://maps.google.com/?q=<?php echo urlencode(utf8_encode($shopRecord->address.", ".$shopRecord->city))?>" class="btn btn-light" target="_blank"><i class="fa fa-map-marker-alt location-icon" aria-hidden="true"></i><?php echo $shopRecord->address." ,".$shopRecord->city;?></a>
+                     <a href="https://maps.google.com/?q=<?php echo urlencode(utf8_encode($shopRecord->address.", ".$shopRecord->city))?>" class="btn btn-light <?php if($itemRow%2==1){echo 'location-button-odd';} else{echo 'location-button-even';};?>" target="_blank"><i class="fa fa-map-marker-alt location-icon" aria-hidden="true"></i><?php echo $shopRecord->address." ,".$shopRecord->city;?></a>
                   </div>
-                <div data-toggle="modal" data-target="#portfolioModal<?php echo $shopRecord->id;?>">
                   <div class="discount-block" style="text-align:center;">
                       <?php 
-                      if(isset($_SESSION["email"]))
-                      {
-                      ?>
-                    <a href="#" class="button alt discount-btn red-btn dicount-modal-button"><i class="fas fa-file-invoice-dollar"></i>获取<?php echo $shopRecord->discount;?>%优惠券</a>
-                      <?php 
-                      }
+                       if($shopRecord->discount==0)
+                        {
+                          ?>
+                          <span class="discount-btn"><i class="fas fa-file-invoice-dollar"></i>暂无此店优惠券</span>
+                        <?php
+                        }                     
+                      elseif(isset($_SESSION["userId"]))
+                        {
+                          $userId = $_SESSION["userId"];
+                        $couponTakenQuery = "select * from coupon where shopId='$shopRecord->id' and userId='$userId' and createdDate > CURDATE()";
+                        $couponTakenResult = mysqli_query($conn,$couponTakenQuery);
+                        $couponTakenrows = mysqli_num_rows($couponTakenResult);
+                        if($couponTakenrows!=0)
+                        {                        
+                        ?>
+                          <span class="discount-btn"><i class="fas fa-file-invoice-dollar"></i>您已领取本店今日优惠券</span>
+                        <?php  
+                        }
+                        elseif(isset($_SESSION["email"])&&$shopRecord->discount!=0)
+                        {
+                        ?>
+                    <div data-toggle="modal" data-target="#portfolioModal<?php echo $shopRecord->id;?>">
+                      <a href="#" class="button alt discount-btn red-btn dicount-modal-button"><i class="fas fa-file-invoice-dollar"></i>获取<?php echo $shopRecord->discount;?>%优惠券</a>
+                      </div>
+                        <?php 
+                        }
+                    }
                       else
                       {
                       ?>
@@ -66,12 +95,12 @@
                       <?php
                         }
                       ?>
-                  </div>
+                  
 
 
                 </div>
 
-                  <div class="portfolio-modal modal fade" id="portfolioModal<?php echo $shopRecord->id;?>" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                  <div class="portfolio-modal modal fade" id="portfolioModal<?php echo $shopRecord->id;?>" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true" style="z-index: 2000;">
                     <div class="modal-dialog modal-xl" role="document">
                       <div class="modal-content">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -95,10 +124,10 @@
 
                           
 
-                           <button class="discount-btn red-btn" href="#" data-dismiss="modal" style="margin: 20px auto; display: block;">
+<!--                            <button class="discount-btn red-btn" href="#" data-dismiss="modal" style="margin: 20px auto; display: block;">
                                   <i class="fas fa-times fa-fw"></i>
                                   Close Window
-                            </button> 
+                            </button>  -->
                         </div>
                       </div>
                     </div>
@@ -113,10 +142,10 @@
                         $followrows = mysqli_num_rows($followResult);
                         $displayNone = "display:none;"
                     ?>
-                      <img src="img/like.svg" class="like-image follow-image" onclick="like(this,event,<?php echo $shopRecord->id;?>,1)" style="<?php if($followrows !=0){echo $displayNone;}?>">
+                      <img src="img/like.svg" class="like-image follow-image" onclick="like(this,event,<?php echo $shopRecord->id;?>,<?php echo $_SESSION["userId"];?>,1)" style="<?php if($followrows !=0){echo $displayNone;}?>">
     
                       
-                        <img src="img/liked.svg" class="like-image unfollow-image" onclick="like(this,event,<?php echo $shopRecord->id;?>,2)" style="<?php if($followrows ==0){echo $displayNone;}?>">
+                        <img src="img/liked.svg" class="like-image unfollow-image" onclick="like(this,event,<?php echo $shopRecord->id;?>,<?php echo $_SESSION["userId"];?>,2)" style="<?php if($followrows ==0){echo $displayNone;}?>">
                     <?php
                          
                       }
@@ -132,11 +161,11 @@
                       
                       <span class="follower-block">
                         <div class="follower-block-item">
-                          <span class="follower-block-head"><i class="fas fa-comments"></i>:</span>
+                          <span class="follower-block-head"><i class="fas fa-comments"></i></span>
                           <span class="follower-block-content follower-block-comment"><?php echo $shopRecord->commentNum;?></span>
                         </div>
                         <div class="follower-block-item">
-                          <span class="follower-block-head"><i class="fas fa-heart"></i>:</span>
+                          <span class="follower-block-head"><i class="fas fa-heart"></i></span>
                           <span class="follower-block-content follower-block-like"><?php echo $shopRecord->subNum;?></span>
                         </div>
                       </span>

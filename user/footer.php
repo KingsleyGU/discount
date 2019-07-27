@@ -78,11 +78,11 @@
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.10.2/validator.min.js" ></script>
     <script type="text/javascript">
-    function like(selector,e,shopId,actionId) {
+    function like(selector,e,shopId,userId,actionId) {
       e.preventDefault();
       $(selector).hide();
       
-      $.post( "subscribe.php", { userId: <?php echo $_SESSION["userId"];?>, shopId: shopId,actionId:actionId })
+      $.post( "subscribe.php", { userId: userId, shopId: shopId,actionId:actionId })
       .done(function(){
         
         var follow_like_block = $(selector).parent(".shop-follow-block").find(".follower-block-like");

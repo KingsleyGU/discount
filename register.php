@@ -1,11 +1,14 @@
-  <?php
+<?php
+session_start();
 require("dbconnection.php");
 $errorMessage = "";
 $name = "";
 $email = "";
 $phone = "";
 $password = "";
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   $name = stripslashes($_POST['name']);
   $email = stripslashes($_POST['email']);
@@ -31,30 +34,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             header("Location: index.php");
         }
   }
-
 }
-
-// $id = $_GET['id'];
-// $result = $result = $conn->query("SELECT * FROM products where id = ".$id);
-// // $result = mysql_query("SELECT * FROM titles");
-
-
-// $product = $result->fetch_assoc();
-// $productDetail = array();
-
-// $result = $result = $conn->query("SELECT * FROM description_img where product_id = ".$id);
-
-// while($row = $result->fetch_assoc()) 
-//   {
-//     array_push($productDetail, $row);
-
-//   }
- //echo json_encode($productDetail);
-
 ?>
-
-
-  <?php include 'user/header.php';?>   
+<?php include 'user/header.php';?>   
           <section id="register" class="masthead">
             <div class="container login-container" style="padding: 30px 0px;">
               <div class="row justify-content-center" style="width:100%;">
@@ -63,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                   <h2 class="text-secondary text-uppercase mb-0 text-center">注册</h2>
                   <div class="error-messgae"><?php echo $errorMessage;?></div>
                   <!-- Icon Divider -->
-                  <form method="post" action="#" id="loginForm">
+                  <form method="post" action="register.php" id="loginForm">
                     <div class="form-control-group">
                       <label for="name">名字</label>
                       <input value="<?php echo $name;?>" type="text" name="name" id="name" class="form-control" required/>

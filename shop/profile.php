@@ -97,7 +97,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // if everything is ok, try to upload file
             } else {
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
                     $query = "UPDATE shopUser SET avatar='$file_name' WHERE id='$ID'";
                     $result = mysqli_query($conn,$query) or die(mysql_error());
                     if($result){

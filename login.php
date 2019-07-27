@@ -1,12 +1,14 @@
- <?php
- session_start();
- unset($_SESSION['name']); 
+<?php
+session_start();
+if(isset($_SESSION['name']))
+{
+  unset($_SESSION['name']); 
   unset($_SESSION['email']); 
   unset($_SESSION['phone']); 
-unset($_SESSION['userId']); 
- ?>
- <?php include 'user/header.php';?>   
- <?php
+  unset($_SESSION['userId']); 
+}
+?>
+<?php
 require("dbconnection.php");
 $errorMessage = "";
 $email = "";
@@ -15,7 +17,6 @@ $password = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   $email = stripslashes($_POST['email']);
   $password = stripslashes($_POST['password']);
-
   $query = "SELECT * FROM `user` WHERE email='$email'and password='".md5($password."coolpang34")."'";
   $result = mysqli_query($conn,$query) or die(mysql_error());
   $rows = mysqli_num_rows($result);
@@ -26,15 +27,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $_SESSION["email"] = $email;
     $_SESSION["phone"] = $userRecord->phone;
     $_SESSION["userId"] = $userRecord->id;
-     header("Location: index.php");
-        
+    header("Location: index.php");    
    }
   else{
     $errorMessage = "User name or password is not correct";
   }
-
 }
 ?>
+<?php include 'user/header.php';?>  
           <section id="login" class="masthead">
             <div class="container login-container" style="padding: 30px 0px;">
               <div class="row justify-content-center" style="width:100%;">

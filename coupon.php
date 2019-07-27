@@ -10,6 +10,10 @@
   	$shopName = $couponRecord->shopName;
   	$shopId = $couponRecord->shopId;
   	$shopImage = $couponRecord->avatar;
+    if(is_null($shopImage))
+    {
+      $shopImage = "panda.png";
+    }
   	$shopDiscount = $couponRecord->discount;
   	$couponDate = $couponRecord->createdDate;
   	$couponUser = $couponRecord->userId;

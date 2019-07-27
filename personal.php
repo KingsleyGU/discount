@@ -1,11 +1,11 @@
- <?php include 'user/header.php';?>   
- <?php 
-  require("dbconnection.php");
-	$userId = $_SESSION["userId"];
-  	$query = "select coupon.*,shopUser.name as shopName,shopUser.avatar from coupon  left join shopUser on coupon.shopId = shopUser.id where coupon.userId='$userId' order by coupon.createdDate desc";
-	$couponResult = mysqli_query($conn,$query) or die(mysql_error());
-
-  ?>
+<?php 
+session_start();
+require("dbconnection.php");
+$userId = $_SESSION["userId"];
+$query = "select coupon.*,shopUser.name as shopName,shopUser.avatar from coupon  left join shopUser on coupon.shopId = shopUser.id where coupon.userId='$userId' order by coupon.createdDate desc";
+$couponResult = mysqli_query($conn,$query) or die(mysql_error());
+?>
+<?php include 'user/header.php';?>   
   <section id="personal" class="masthead">
 	<div class="container inner ">
           <div class="personal row">

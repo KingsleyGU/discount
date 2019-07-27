@@ -1,26 +1,25 @@
- <?php include 'header.php';?>  
- <?php 
-	require("../dbconnection.php");
-	if(!isset($_SESSION["shopId"]))
-	{
-		header("Location: login.php");
+<?php 
+session_start();
+require("../dbconnection.php");
+if(!isset($_SESSION["shopId"]))
+{
+	header("Location: login.php");
+}
+$shopId = $_SESSION["shopId"];
+$shopQuery = "select * from shopUser where id='$shopId'";
+$shopResult = mysqli_query($conn,$shopQuery) or die(mysql_error());
+$rows = mysqli_num_rows($shopResult);
+if($rows==1){
+  $shopRecord = mysqli_fetch_object($shopResult);  
+  $location = $shopRecord->address . ', ' . $shopRecord->zip . ' '. $shopRecord->city; 
 	}
-	$shopId = $_SESSION["shopId"];
-	$shopQuery = "select * from shopUser where id='$shopId'";
-	$shopResult = mysqli_query($conn,$shopQuery) or die(mysql_error());
-	$rows = mysqli_num_rows($shopResult);
-	if($rows==1){
-	  $shopRecord = mysqli_fetch_object($shopResult);  
-	  $location = $shopRecord->address . ', ' . $shopRecord->zip . ' '. $shopRecord->city; 
-  	}
-	$shopItemQuery = "select * from shopItem where shopId='$shopId'";
-	$shopItemResult = mysqli_query($conn,$shopItemQuery) or die(mysql_error());
-	$shopTagQuery = "select * from shopTags where shopId='$shopId'";
-	$shopTagResult = mysqli_query($conn,$shopTagQuery) or die(mysql_error());
-	$shopTags = array();
-
-
- ?> 
+$shopItemQuery = "select * from shopItem where shopId='$shopId'";
+$shopItemResult = mysqli_query($conn,$shopItemQuery) or die(mysql_error());
+$shopTagQuery = "select * from shopTags where shopId='$shopId'";
+$shopTagResult = mysqli_query($conn,$shopTagQuery) or die(mysql_error());
+$shopTags = array();
+?> 
+<?php include 'header.php';?>  
   <header class="masthead text-center" style="color:#000;">
     <div class="container d-flex align-items-center flex-column">
     	<div class="row">
@@ -38,7 +37,14 @@
 		</div>
       
       <div class="change-trigger">
-	      <img class="masthead-avatar mb-5 item-content" src="<?php echo "shopimage/".$shopRecord->avatar;?>" alt="" >
+      	<?php 
+      	$avatar = $shopRecord->avatar;
+      	if(is_null($avatar))
+      	{
+      		$avatar = "panda.png";
+      	}
+      	?>
+	      <img class="masthead-avatar mb-5 item-content" src="<?php echo "shopimage/".$avatar;?>" alt="" >
 				<form action="profile.php" method="post" enctype="multipart/form-data" class="profileForm">
 					<input type="hidden" name="id" value="<?php echo $_SESSION["shopId"];?>"/>
 					<input type="hidden" name="itemId" value="5"/>
@@ -60,16 +66,16 @@
 			<input type="hidden" name="tagId" value="<?php echo $shopTag->id;?>">
 			<button type="submit" class="btn  alt  tag-button green-tag-button">
 			<?php 
-			if($shopTag->id == 1){
+			if($shopTag->tagCategory == 1){
 				echo "川菜";
 			}
-			elseif ($shopTag->id == 2) {
+			elseif ($shopTag->tagCategory == 2) {
 				echo "粤菜";
 			}
-			elseif ($shopTag->id == 3) {
+			elseif ($shopTag->tagCategory == 3) {
 				echo "湘菜";
 			}	
-			elseif ($shopTag->id == 4) {
+			elseif ($shopTag->tagCategory == 4) {
 				echo "东北菜";
 			}			
 			?><i class="fas fa-minus tag-button-icon"></i>
@@ -203,7 +209,7 @@
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-               <div class="img-responsive img-thumbnail ratio-4-3" style="background-image:url(<?php echo "./shop".$shopId."/".$shopItemRecord->img_url;?>)"></div>
+               <div class="img-responsive ratio-4-3" style="background-image:url(<?php echo "./shop".$shopId."/".$shopItemRecord->img_url;?>)"></div>
  
             <div class="item-name "><?php echo $shopItemRecord->name;?></div>
           </div>
@@ -247,7 +253,7 @@
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-          <div class="img-responsive img-thumbnail ratio-4-3" style="background-image:url('../img/add.png')"></div>
+          <div class="img-responsive ratio-4-3" style="background-image:url('../img/add.png')"></div>
  
             <div class="item-name ">添加美食</div>
           </div>

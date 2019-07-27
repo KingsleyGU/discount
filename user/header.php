@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
- 
 <?php
 session_start();
 ?>
-<head>
+<!DOCTYPE html>
+<html lang="en">
+ <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Coolpang</title>
-
+  <title>Coolpanda</title>
+  <link rel="shortcut icon" href="img/coolpang.png"/>
   <!-- Custom fonts for this theme -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -28,10 +27,10 @@ session_start();
 <body id="page-top">
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" >
+  <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand logo" href="index.php">
-      <img src="img/coolpang.png" class="logo-img"/>CoolPang</a>
+      <img src="img/coolpang.png" class="logo-img"/><span id="logo-text">CoolPanda</span></a>
       <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -55,7 +54,7 @@ session_start();
                   <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="personal.php">欢迎你,<?php echo $_SESSION["name"]; ?></a> 
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-                  <a href="login.php" class="button alt discount-btn red-btn">退出</a>
+                  <a href="login.php" class="btn alt  header-btn">退出</a>
           </li>
           <?php 
           }
@@ -64,10 +63,10 @@ session_start();
           ?>
 
           <li class="nav-item mx-0 mx-lg-1">
-                  <a href="login.php" class="button alt discount-btn green-btn">登录</a>
+                  <a href="login.php" class="btn alt  header-btn">登录</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-                  <a href="register.php" class="button alt discount-btn green-btn">注册</a>
+                  <a href="register.php" class="btn alt  header-btn">注册</a>
           </li>
           <?php
                     }
