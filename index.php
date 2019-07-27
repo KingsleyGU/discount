@@ -13,23 +13,10 @@
           <h1>酷胖: <span>哥本哈根终极打折coupon<br />
           欢迎你来领取</span></h1>
         </div>
-       <ul class="circles">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-        </ul>
   </header>
   <!-- Portfolio Section -->
 
 <?php include 'shopitem.php';?>
-
 
 
 

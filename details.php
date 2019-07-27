@@ -1,5 +1,4 @@
 <?php 
-session_start();
 require("dbconnection.php");
 $shopId = $_GET["shopId"];
 $query = "select shopUser.*,(select count(*) from subscription where subscription.shopId = shopUser.id) as subNum,(select count(*) from comment where comment.shopId = shopUser.id) as commentNum from shopUser where shopUser.id='$shopId'";
@@ -8,6 +7,7 @@ $rows = mysqli_num_rows($result);
 if($rows==1){
 $shopRecord = mysqli_fetch_object($result);  
 $location = $shopRecord->address . ', ' . $shopRecord->zip . ' '. $shopRecord->city; 
+$category = $shopRecord->category;
 }
 $shopItemQuery = "select * from shopItem where shopId='$shopId'";
 $shopItemResult = mysqli_query($conn,$shopItemQuery) or die(mysql_error());
@@ -95,7 +95,13 @@ $shopTagResult = mysqli_query($conn,$shopTagQuery) or die(mysql_error());
     <div class="container">
 
       <!-- Portfolio Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">推荐菜单</h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0"><?php if($category==1){
+          echo "推荐菜单";
+      }
+      else{
+        echo "推荐商品";
+      }
+      ?></h2>
 
       <!-- Icon Divider -->
       <div class="divider-custom">

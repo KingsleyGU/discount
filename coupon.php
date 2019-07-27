@@ -18,12 +18,30 @@
   	$couponDate = $couponRecord->createdDate;
   	$couponUser = $couponRecord->userId;
   }
-
+    $expired = 0;
+    $date_today = new DateTime(date("Y-m-d"));
+    if(date_create($couponDate)>$date_today)
+    {
+      $expired = 0;
+    }
+    else{
+      $expired = 1;
+    }  
  ?> 
 <section id="coupon" class="masthead">
 	<div class="container inner ">
-          <div class="coupon">
-              <h3><?php echo $shopName;?></h3>
+          <div class="coupon" style="position: relative;">
+            <?php 
+              if($expired ==1)
+              {
+            ?>
+              <span class="coupon-ribbon">
+                <span>已过期</span>
+              </span>
+            <?php 
+              }
+            ?>              
+            <h3><?php echo $shopName;?></h3>
             <img src="<?php echo "./shop/shopimage/".$shopImage;?>" alt="Avatar" style="width:100%;">
             <div class="container" style="background-color:white">
               <h3><b><?php echo $shopDiscount;?>% OFF</b></h3> 

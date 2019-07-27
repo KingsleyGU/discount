@@ -4,7 +4,11 @@
       <?php
         if($category ==1)
         {
-          echo "好吃不过中餐";
+          echo "<span class='category-head'>吃在</span><img src='img/coolpanda_eating.png' class='logo-img'/><span class='category-head'>哥哈</span>";
+        }
+        elseif($category ==3)
+        {
+          echo "<span class='category-head'>剁手</span><img src='img/panda_shopping.png' class='logo-img'/><span class='category-head'>哥哈</span>";
         }
       ?></h2>
 
@@ -15,9 +19,9 @@
           while($shopRecord = mysqli_fetch_object($shopResult)) {   
           $itemRow = $itemRow +1;  
         ?>
-        <div class="col-md-4 col-lg-4 " style="z-index: 20;">
-          <div class="shop-item <?php if($itemRow%2==1){echo 'shop-item-odd';} else{echo 'shop-item-even';};?>">
-              <a href="details.php?shopId=<?php echo $shopRecord->id;?>" class="shop-detail-link">
+        <div class="col-md-4 col-lg-4 ">
+          <div class="shop-item" >
+              <a href="details.php?shopId=<?php echo $shopRecord->id;?>" class="shop-detail-link" >
                   <?php 
                   $avatar = $shopRecord->avatar;
                   if(is_null($avatar))
@@ -36,7 +40,7 @@
                         while($shopTag = mysqli_fetch_object($shopTagResult)) { 
                   ?>
                   
-                      <span class="btn  alt  tag-button <?php if($itemRow%2==1){echo 'tag-button-odd';} else{echo 'tag-button-even';};?>">
+                      <span class="btn  alt  tag-button food-tag-button">
                       <?php 
                       if($shopTag->tagCategory == 1){
                         echo "川菜";

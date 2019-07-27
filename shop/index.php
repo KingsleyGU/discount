@@ -64,7 +64,7 @@ $shopTags = array();
 			<input type="hidden" name="request_type" value="1">
 			<input type="hidden" name="shopId" value="<?php echo $_SESSION["shopId"];?>">
 			<input type="hidden" name="tagId" value="<?php echo $shopTag->id;?>">
-			<button type="submit" class="btn  alt  tag-button green-tag-button">
+			<button type="submit" class="btn  alt  tag-button detail-tag-button">
 			<?php 
 			if($shopTag->tagCategory == 1){
 				echo "川菜";

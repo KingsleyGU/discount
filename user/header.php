@@ -30,7 +30,7 @@ session_start();
   <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand logo" href="index.php">
-      <img src="img/coolpang.png" class="logo-img"/><span id="logo-text">CoolPanda</span></a>
+      <img src="img/coolpanda.png" class="logo-img"/></a>
       <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -38,13 +38,10 @@ session_start();
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php#portfolio">中餐</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.php#portfolio">吃吃吃</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="sushi.php">寿司</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="danish_shop.php">丹麦商店</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="danish_shop.php">买买买</a>
           </li>
           <?php 
           if(isset($_SESSION["email"]))

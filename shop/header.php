@@ -43,7 +43,7 @@
                   <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">欢迎你,<?php echo $_SESSION["shopName"]; ?></a> 
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-                  <a href="login.php" class="button alt discount-btn red-btn">退出</a>
+                  <a href="login.php" class="btn header-btn">退出</a>
           </li>
           <?php 
           }
@@ -52,10 +52,10 @@
           ?>
 
           <li class="nav-item mx-0 mx-lg-1">
-                  <a href="login.php" class="button alt discount-btn green-btn">登录</a>
+                  <a href="login.php" class="btn header-btn">登录</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-                  <a href="register.php" class="button alt discount-btn green-btn">注册</a>
+                  <a href="register.php" class="btn header-btn">注册</a>
           </li>
           <?php
                     }
