@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require("dbconnection.php");
 $shopId = $_GET["shopId"];
 $query = "select shopUser.*,(select count(*) from subscription where subscription.shopId = shopUser.id) as subNum,(select count(*) from comment where comment.shopId = shopUser.id) as commentNum from shopUser where shopUser.id='$shopId'";
@@ -13,8 +14,8 @@ $shopItemQuery = "select * from shopItem where shopId='$shopId'";
 $shopItemResult = mysqli_query($conn,$shopItemQuery) or die(mysql_error());
 $shopTagQuery = "select * from shopTags where shopId='$shopRecord->id'";
 $shopTagResult = mysqli_query($conn,$shopTagQuery) or die(mysql_error());
-?> 
-<?php  include 'user/header.php';?>  
+?>  
+<?php  include 'user/header.php';?> 
   <header class="masthead text-center" style="color:#000;">
     <div class="container profile-page">
         <div class="row">

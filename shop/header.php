@@ -17,6 +17,8 @@
   <!-- Theme CSS -->
   <link href="../css/freelancer.css" rel="stylesheet">
 <link href="../css/main.css" rel="stylesheet">
+<link href="../css/shop.css" rel="stylesheet">
+<link href="../css/form.css" rel="stylesheet">
 
 
 </head>

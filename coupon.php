@@ -1,33 +1,34 @@
-<?php include 'user/header.php';?>
- <?php 
-  require("dbconnection.php");
-  $couponId = $_GET["couponId"];
-  $query = "select coupon.*,shopUser.name as shopName,shopUser.avatar from coupon  left join shopUser on coupon.shopId = shopUser.id where coupon.id='$couponId'";
-  $result = mysqli_query($conn,$query) or die(mysql_error());
-  $rows = mysqli_num_rows($result);
-  if($rows==1){
-  	$couponRecord = mysqli_fetch_object($result);  
-  	$shopName = $couponRecord->shopName;
-  	$shopId = $couponRecord->shopId;
-  	$shopImage = $couponRecord->avatar;
-    if(is_null($shopImage))
-    {
-      $shopImage = "panda.png";
-    }
-  	$shopDiscount = $couponRecord->discount;
-  	$couponDate = $couponRecord->createdDate;
-  	$couponUser = $couponRecord->userId;
+<?php 
+session_start();
+require("dbconnection.php");
+$couponId = $_GET["couponId"];
+$query = "select coupon.*,shopUser.name as shopName,shopUser.avatar from coupon  left join shopUser on coupon.shopId = shopUser.id where coupon.id='$couponId'";
+$result = mysqli_query($conn,$query) or die(mysql_error());
+$rows = mysqli_num_rows($result);
+if($rows==1){
+	$couponRecord = mysqli_fetch_object($result);  
+	$shopName = $couponRecord->shopName;
+	$shopId = $couponRecord->shopId;
+	$shopImage = $couponRecord->avatar;
+  if(is_null($shopImage))
+  {
+    $shopImage = "panda.png";
   }
+	$shopDiscount = $couponRecord->discount;
+	$couponDate = $couponRecord->createdDate;
+	$couponUser = $couponRecord->userId;
+}
+  $expired = 0;
+  $date_today = new DateTime(date("Y-m-d"));
+  if(date_create($couponDate)>$date_today)
+  {
     $expired = 0;
-    $date_today = new DateTime(date("Y-m-d"));
-    if(date_create($couponDate)>$date_today)
-    {
-      $expired = 0;
-    }
-    else{
-      $expired = 1;
-    }  
- ?> 
+  }
+  else{
+    $expired = 1;
+  }  
+?> 
+<?php include 'user/header.php';?>
 <section id="coupon" class="masthead">
 	<div class="container inner ">
           <div class="coupon" style="position: relative;">

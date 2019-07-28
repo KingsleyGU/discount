@@ -41,21 +41,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="col-lg-8 wrap-login">
                   <!-- Portfolio Modal - Title -->
                   <h2 class="text-secondary text-uppercase mb-0 text-center">登录</h2>
-                  <div class="error-messgae"><?php echo $errorMessage;?></div>
+                  <span class="login100-form-avatar">
+                    <img src="img/coolpang.png" alt="AVATAR">
+                  </span>
+                  
                   <!-- Icon Divider -->
                   <form method="post" action="#" id="loginForm">
+                      <div class="error-messgae"><?php echo $errorMessage;?></div>
+                      <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter email">
+                        <input class="input100" value="<?php echo $email;?>" type="email" class="form-control" name="email" id="email" data-error="Bruh, that email address is invalid" required/>
+                        <span class="focus-input100" data-placeholder="Email"></span>
+                      </div>
 
-                    <div class="form-control-group">
-                      <label for="email">邮箱</label>
-                      <input value="<?php echo $email;?>" type="email" class="form-control" name="email" id="email" data-error="Bruh, that email address is invalid" required/>
-                      <div class="help-block with-errors"></div>
-                    </div>
-                    <div class="form-control-group">
-                      <label for="password">密码</label>
-                      <input value="<?php echo $password;?>" type="password" name="password" id="password" class="form-control"/>
-                    </div>                                    
-                    <input type="submit" value="提交" class="alt discount-btn red-btn message-btn" />
+                      <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                        <input value="<?php echo $password;?>" type="password" name="password" id="password" class="input100"/>
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                      </div>   
+
+                      <input type="submit" value="提交" class="login100-form-btn" />
+                      <div class="p-t-50">
+                          <span class="txt1">
+                            Don’t have an account?
+                          </span>
+
+                          <a href="register.php" class="txt2">
+                            Sign up
+                          </a>
+                      </div>
                   </form>
+
                 </div>
               </div>
             </div>

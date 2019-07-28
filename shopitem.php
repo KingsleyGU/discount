@@ -4,11 +4,11 @@
       <?php
         if($category ==1)
         {
-          echo "<span class='category-head'>吃在</span><img src='img/coolpanda_eating.png' class='logo-img'/><span class='category-head'>哥哈</span>";
+          echo "<span class='category-head'>".$titleArray['eat_in']."</span><img src='img/coolpanda_eating.png' class='logo-img'/><span class='category-head'>".$titleArray['cph']."</span>";
         }
         elseif($category ==3)
         {
-          echo "<span class='category-head'>剁手</span><img src='img/panda_shopping.png' class='logo-img'/><span class='category-head'>哥哈</span>";
+          echo "<span class='category-head'>".$titleArray['purchase']."</span><img src='img/panda_shopping.png' class='logo-img'/><span class='category-head'>".$titleArray['cph']."</span>";
         }
       ?></h2>
 
@@ -87,7 +87,7 @@
                         {
                         ?>
                     <div data-toggle="modal" data-target="#portfolioModal<?php echo $shopRecord->id;?>">
-                      <a href="#" class="button alt discount-btn red-btn dicount-modal-button"><i class="fas fa-file-invoice-dollar"></i>获取<?php echo $shopRecord->discount;?>%优惠券</a>
+                      <a href="#" class="button alt discount-btn red-btn dicount-modal-button"><i class="fas fa-file-invoice-dollar"></i><?php echo $titleArray['retrieve']." ".$shopRecord->discount."% ".$titleArray['coupon'];?></a>
                       </div>
                         <?php 
                         }

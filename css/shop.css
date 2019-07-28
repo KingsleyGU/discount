@@ -1,0 +1,31 @@
+label {
+    display: block;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 1em 0 1em 0;
+    line-height: 2;
+    color: #e5474b;
+}
+ input[type="text"], input[type="password"], input[type="email"], select, textarea {
+    background: none;
+    border-color: #ff0000;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    border: solid 3px #e5474b;
+    color: inherit;
+    display: block;
+    outline: 0;
+    padding: 0 1em;
+    text-decoration: none;
+    width: 100%;
+}
+input[type="text"], input[type="password"], input[type="email"]
+{
+  height: 2.75em;
+}
+textarea {
+ padding: 0.75em 1em;
+}

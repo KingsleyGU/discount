@@ -10730,7 +10730,7 @@ padding: 13em 0 11em 0;
 }
 @media (max-width: 400px) {
   .masthead {
-   padding-top: calc(6rem + 14px);
+   padding-top: calc(10rem + 14px);
     padding-bottom: 6rem;
   }
 }
@@ -10843,7 +10843,7 @@ form .row:first-child .floating-label-form-group {
 .footer {
   padding-top: 5rem;
   padding-bottom: 5rem;
-  background-color: #1c1c1c;
+  background-color: #909090;
   color: #fff;
 }
 

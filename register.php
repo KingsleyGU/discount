@@ -46,24 +46,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                   <div class="error-messgae"><?php echo $errorMessage;?></div>
                   <!-- Icon Divider -->
                   <form method="post" action="register.php" id="loginForm">
-                    <div class="form-control-group">
-                      <label for="name">名字</label>
-                      <input value="<?php echo $name;?>" type="text" name="name" id="name" class="form-control" required/>
+                    <div class="wrap-input100 validate-input m-b-50" data-validate = "Enter name">
+                      <input class="input100" value="<?php echo $name;?>" type="text" name="name" id="name"  required/>
+                      <span class="focus-input100" data-placeholder="Name"></span>
+
                     </div>
-                    <div class="form-control-group">
-                      <label for="email">邮箱</label>
-                      <input value="<?php echo $email;?>" type="email" class="form-control" name="email" id="email" data-error="Bruh, that email address is invalid" required/>
-                      <div class="help-block with-errors"></div>
-                    </div>
-                     <div class="form-control-group">
-                      <label for="phone">电话</label>
-                      <input value="<?php echo $phone;?>" pattern="^[0-9]{1,}$" maxlength="15" type="text" name="phone" id="phone" class="form-control"/>
-                    </div>                    
-                    <div class="form-control-group">
-                      <label for="password">密码</label>
-                      <input value="<?php echo $password;?>" type="password" name="password" id="password" class="form-control" required/>
-                    </div>                                    
-                    <input type="submit" value="提交" class="alt discount-btn red-btn message-btn" />
+                      <div class="wrap-input100 validate-input m-b-50" data-validate = "Enter email">
+                        <input class="input100" value="<?php echo $email;?>" type="email" name="email" id="email" data-error="Bruh, that email address is invalid" required/>
+                        <span class="focus-input100" data-placeholder="Email"></span>
+                      </div>
+                     <div class="wrap-input100 validate-input m-b-50" data-validate = "Enter phone">
+                      <input class="input100" value="<?php echo $phone;?>" pattern="^[0-9]{1,}$" maxlength="15" type="text" name="phone" id="phone" />
+                      <span class="focus-input100" data-placeholder="Phone"></span>
+                    </div>  
+
+                      <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                        <input value="<?php echo $password;?>" type="password" name="password" id="password" class="input100"/>
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                      </div>  
+
+                      <input type="submit" value="提交" class="login100-form-btn" />
+                      <div class="p-t-50">
+                          <span class="txt1">
+                            Already have an account?
+                          </span>
+
+                          <a href="login.php" class="txt2">
+                            Log in
+                          </a>
+                      </div>
                   </form>
                 </div>
               </div>

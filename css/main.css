@@ -2,7 +2,7 @@
     font-family: "Lato", sans-serif;
   }
   .navbar{
-    background: #1c1c1c;
+    background:#909090;
     color: #ffffff;
   }
   .navbar a{
@@ -53,9 +53,6 @@
   }
   #banner h1 span{
     line-height: 1.5;
-  }
-  .masthead{
-    margin-top: 30px;
   }
   .masthead h2{
     line-height: 80px;
@@ -180,12 +177,8 @@ color: #000;
   line-height: 25px; 
   margin-top: 5px;
 }
-#intro{
-  padding: 6em 0 4em 0;
-
-}
 h2{
-  font-size: 30pt;
+  font-size: 20pt;
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
@@ -196,37 +189,7 @@ h1, h2, h3, h4, h5, h6 {
 .profile-image{
   margin-bottom: 20px;
 }
-label {
-    display: block;
-    font-size: 1.2em;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin: 1em 0 1em 0;
-    line-height: 2;
-    color: #e5474b;
-}
- input[type="text"], input[type="password"], input[type="email"], select, textarea {
-    background: none;
-    border-color: #ff0000;
-    -webkit-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    border-radius: 0;
-    border: solid 3px #e5474b;
-    color: inherit;
-    display: block;
-    outline: 0;
-    padding: 0 1em;
-    text-decoration: none;
-    width: 100%;
-}
-input[type="text"], input[type="password"], input[type="email"]
-{
-  height: 2.75em;
-}
-textarea {
- padding: 0.75em 1em;
-}
+
 .message-btn{
   margin-top: 40px;
 }
@@ -262,12 +225,6 @@ textarea {
   background-color: #fff;
   padding: 50px 5%;
 
-  background: -moz-linear-gradient(left, #f3f3f3 0%, #f3f3f3 50%, #f7f7f7 0%, #f7f7f7 100%);
-  background: -webkit-linear-gradient(left, #f3f3f3 0%, #f3f3f3 50%, #f7f7f7 0%, #f7f7f7 100%);
-  background: linear-gradient(to right, #f3f3f3 0%, #f3f3f3 50%, #f7f7f7 0%, #f7f7f7 100%);
-}
-#login, #register{
-  background:rgba(0,0,0,0.1);
 }
 .coupon {
   border: 5px dotted #bbb;
@@ -453,8 +410,6 @@ border-radius: 20px;
 .like-image{
   height: 60px;
   width: 60px;
-  position: relative;
-  z-index: 1000;
   float: left;
 }
 .follower-block{
@@ -639,5 +594,8 @@ form{
 {
   background-color: #fff;
 }
+.language-img{
+    max-height: 20px;
+  }
 
   
