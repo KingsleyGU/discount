@@ -9,7 +9,7 @@ if(isset($_SESSION['name']))
 }
 ?>
 <?php
-require("dbconnection.php");
+require("api/dbconnection.php");
 $errorMessage = "";
 $email = "";
 $password = "";
@@ -40,13 +40,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               <div class="row justify-content-center" style="width:100%;">
                 <div class="col-lg-8 wrap-login">
                   <!-- Portfolio Modal - Title -->
-                  <h2 class="text-secondary text-uppercase mb-0 text-center">登录</h2>
-                  <span class="login100-form-avatar">
-                    <img src="img/coolpang.png" alt="AVATAR">
-                  </span>
+                  <h2 class="text-secondary text-uppercase mb-0 text-center"><?php echo $titleArray['login'];?></h2>
                   
                   <!-- Icon Divider -->
-                  <form method="post" action="#" id="loginForm">
+                  <form method="post" action="#" id="loginForm" style="padding-top:0px;">
                       <div class="error-messgae"><?php echo $errorMessage;?></div>
                       <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter email">
                         <input class="input100" value="<?php echo $email;?>" type="email" class="form-control" name="email" id="email" data-error="Bruh, that email address is invalid" required/>

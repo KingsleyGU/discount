@@ -1,6 +1,18 @@
+<style type="text/css">
+  .use-coupon-block{
+    cursor: pointer;
+  }
+  .coupon-ribbon{
+    display: none;
+  }
+  .use-coupon-image{
+    height: 60px;
+    width: 60px;
+  }
+</style>
 <?php 
 session_start();
-require("dbconnection.php");
+require("api/dbconnection.php");
 $couponId = $_GET["couponId"];
 $query = "select coupon.*,shopUser.name as shopName,shopUser.avatar from coupon  left join shopUser on coupon.shopId = shopUser.id where coupon.id='$couponId'";
 $result = mysqli_query($conn,$query) or die(mysql_error());
@@ -37,7 +49,7 @@ if($rows==1){
               {
             ?>
               <span class="coupon-ribbon">
-                <span>已过期</span>
+                <span>已使用</span>
               </span>
             <?php 
               }
@@ -53,8 +65,17 @@ if($rows==1){
               <p class="expire-code">有效期: <span class="promo"><?php echo date_format(date_create($couponDate), 'jS F Y');?> 23:59:59</span></p>             
             </div>
           </div>
+          <div style="text-align:center; margin-top: 20px;" class="use-coupon-block">
+            <img src="img/like.svg" class=" use-coupon-image" >
+          </div>
 	</div>
+
 </section>
 
 
 <?php include 'user/footer.php';?>
+<script type="text/javascript">
+$( ".use-coupon-block" ).click(function() {
+  $( ".coupon-ribbon" ).show( "slow");
+});
+</script>

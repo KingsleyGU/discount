@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("dbconnection.php");
+require("api/dbconnection.php");
 $errorMessage = "";
 $name = "";
 $email = "";
@@ -10,21 +10,21 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-  $name = stripslashes($_POST['name']);
-  $email = stripslashes($_POST['email']);
-  $phone = stripslashes($_POST['phone']);
-  $password = stripslashes($_POST['password']);
+  $name = mysqli_real_escape_string($conn,stripslashes($_POST['name']));
+  $email = mysqli_real_escape_string($conn,stripslashes($_POST['email']));
+  $phone = mysqli_real_escape_string($conn,stripslashes($_POST['phone']));
+  $password = mysqli_real_escape_string($conn,stripslashes($_POST['password']));
 
-  $query = "SELECT * FROM `user` WHERE email='$email' or phone='$phone'";
-  $result = mysqli_query($conn,$query) or die(mysql_error());
+  $query = "SELECT * FROM `user` WHERE email='$email' ";
+  $result = mysqli_query($conn,$query);
   $rows = mysqli_num_rows($result);
   if($rows==1){
-        $errorMessage = "This phone or email has already been used";
+        $errorMessage = "This email has already been used";
    }
   else{
     $trn_date = date("Y-m-d H:i:s");
-    $query = "INSERT into `user` (name, email, phone, password, createdDate)
-      VALUES ('$name', '$email', '$phone', '".md5($password."coolpang34")."', '$trn_date')";
+    $query = "INSERT into `user` (name, email, phone, password, createdDate,avatar)
+      VALUES ('$name', '$email', '$phone', '".md5($password."coolpang34")."', '$trn_date',null)";
      $result = mysqli_query($conn,$query);
       if($result){
             $_SESSION["name"] = $name;
@@ -42,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               <div class="row justify-content-center" style="width:100%;">
                 <div class="col-lg-8 wrap-login">
                   <!-- Portfolio Modal - Title -->
-                  <h2 class="text-secondary text-uppercase mb-0 text-center">注册</h2>
+                  <h2 class="text-secondary text-uppercase mb-0 text-center"><?php echo $titleArray['register'];?></h2>
                   <div class="error-messgae"><?php echo $errorMessage;?></div>
                   <!-- Icon Divider -->
                   <form method="post" action="register.php" id="loginForm">

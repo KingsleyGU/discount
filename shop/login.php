@@ -9,7 +9,7 @@ if(isset($_SESSION['shopName']))
 }
 ?>
 <?php
-require("../dbconnection.php");
+require("../api/dbconnection.php");
 $errorMessage = "";
 $email = "";
 $password = "";
@@ -17,24 +17,30 @@ $password = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   $email = stripslashes($_POST['email']);
   $password = stripslashes($_POST['password']);
-
-  $query = "SELECT * FROM `shopUser` WHERE email='$email'and password='".md5($password."coolpang45")."'";
-  $result = mysqli_query($conn,$query) or die(mysql_error());
-  $rows = mysqli_num_rows($result);
-  if($rows==1){
-    $userRecord = mysqli_fetch_object($result);
-
-    $_SESSION["shopName"] = $userRecord->name;
+  if($email=="gumin@coolpanda.dk"&&md5($password."coolpang45")=='55eefcd7a73d06b1490cbcb99d215379')
+  {
+    $_SESSION["shopName"] = "admin";
     $_SESSION["shopEmail"] = $email;
-    $_SESSION["shopPhone"] = $userRecord->phone;
-    $_SESSION["shopId"] = $userRecord->id;
-
-     header("Location: index.php");
-        
-   }
-  else{
-    $errorMessage = "User name or password is not correct";
+    header("Location: admin.php");  
   }
+  else
+  {
+    $query = "SELECT * FROM `shopUser` WHERE email='$email'and password='".md5($password."coolpang45")."'";
+    $result = mysqli_query($conn,$query) or die(mysql_error());
+    $rows = mysqli_num_rows($result);
+    if($rows==1){
+      $userRecord = mysqli_fetch_object($result);
+      $_SESSION["shopName"] = $userRecord->name;
+      $_SESSION["shopEmail"] = $email;
+      $_SESSION["shopPhone"] = $userRecord->phone;
+      $_SESSION["shopId"] = $userRecord->id;
+      header("Location: index.php?shopId=".$_SESSION["shopId"]);         
+     }
+    else{
+      $errorMessage = "User name or password is not correct";
+    }  
+  }
+
 }
 ?>
 <?php include 'header.php';?>   

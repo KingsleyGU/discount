@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("../dbconnection.php");
+require("../api/dbconnection.php");
 $errorMessage = "";
 $name = "";
 $email = "";
@@ -20,15 +20,16 @@ $errorMessage = "This phone or email has already been used";
 }
 else{
 $trn_date = date("Y-m-d H:i:s");
-$query = "INSERT into `shopUser` (name, email, phone, password, createdDate,category,description,avatar,address,zip,city)
-VALUES ('$name', '$email', '$phone', '".md5($password."coolpang45")."', '$trn_date',$category,null,null,null,null,null)";
+$query = "INSERT into `shopUser` (name, name_UK, email, phone, password, createdDate,category,description,description_UK,avatar,address,zip,city)
+VALUES ('$name', null ,'$email', '$phone', '".md5($password."coolpang45")."', '$trn_date',
+$category,null,null,null,null,null,null)";
 $result = mysqli_query($conn,$query);
 if($result){
     $_SESSION["shopName"] = $name;
     $_SESSION["shopEmail"] = $email;
     $_SESSION["shopPhone"] = $phone;
     $_SESSION["shopId"] = mysqli_insert_id($conn);
-    header("Location: index.php");
+    header("Location: index.php?shopId=".$_SESSION["shopId"]);
 }
 else
 {

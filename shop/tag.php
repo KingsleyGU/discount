@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require("../dbconnection.php");
+require("../api/dbconnection.php");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 $shopId = $_REQUEST["shopId"];
 if($_REQUEST["request_type"]==1)
@@ -11,7 +11,7 @@ if($_REQUEST["request_type"]==1)
     $query = "DELETE FROM shopTags WHERE id='$id'";
     $result = mysqli_query($conn,$query);
     if($result){
-        header("Location: index.php");
+        header("Location: index.php?shopId=".$shopId);
     }
 
 }
@@ -21,7 +21,7 @@ elseif ($_REQUEST["request_type"]==2) {
         VALUES ('$tagCategory', '$shopId')";
     $result = mysqli_query($conn,$query) or die(mysql_error());
     if($result){
-        header("Location: index.php");
+        header("Location: index.php?shopId=".$shopId);
     }
 }
 }

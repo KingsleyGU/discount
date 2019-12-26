@@ -1,61 +1,88 @@
 <?php
-require("../dbconnection.php");
+require("../api/dbconnection.php");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $ID = $_POST["id"];
+    $shopId = $ID;
     if($_POST["itemId"]==1)
     {
-        $name=$_POST['name'];
-        $query = "UPDATE shopUser SET name='$name' WHERE id='$ID'";
-        $result = mysqli_query($conn,$query) or die(mysql_error());
+        $name=mysqli_real_escape_string($conn,$_POST['name']);
+        $name_UK=mysqli_real_escape_string($conn,$_POST['name_UK']);
+        $query = "UPDATE shopUser SET name='$name',name_UK='$name_UK' WHERE id='$ID'";
+        $result = mysqli_query($conn,$query);
         if($result){
             $_SESSION["shopName"] = $name;
-            header("Location: index.php");
+            header("Location: index.php?shopId=".$shopId);
+        }
+        else
+        {
+            echo mysqli_error($conn);
         }
 
     }
     elseif ($_POST["itemId"]==2) {
-        $description=$_POST['description'];
-        $query = "UPDATE shopUser SET description='$description' WHERE id='$ID'";
-        $result = mysqli_query($conn,$query) or die(mysql_error());
+        $description=mysqli_real_escape_string($conn,$_POST['description']);
+        $description_UK=mysqli_real_escape_string($conn,$_POST['description_UK']);
+        $query = "UPDATE shopUser SET description='$description',description_UK='$description_UK' WHERE id='$ID'";
+        $result = mysqli_query($conn,$query) ;
         if($result){
-            header("Location: index.php");
+            header("Location: index.php?shopId=".$shopId);
         }
+        else
+        {
+            echo mysqli_error($conn);
+        }        
     }
     elseif ($_POST["itemId"]==3) {
         $email=$_POST['email'];
         $query = "UPDATE shopUser SET email='$email' WHERE id='$ID'";
-        $result = mysqli_query($conn,$query) or die(mysql_error());
+        $result = mysqli_query($conn,$query) ;
         if($result){
             $_SESSION["shopEmail"] = $email;
-            header("Location: index.php");
+            header("Location: index.php?shopId=".$shopId);
         }
+        else
+        {
+            echo mysqli_error($conn);
+        }       
     }   
     elseif ($_POST["itemId"]==4) {
         $phone=$_POST['phone'];
         $query = "UPDATE shopUser SET phone='$phone' WHERE id='$ID'";
-        $result = mysqli_query($conn,$query) or die(mysql_error());
+        $result = mysqli_query($conn,$query) ;
         if($result){
             $_SESSION["shopPhone"] = $phone;
-            header("Location: index.php");
+            header("Location: index.php?shopId=".$shopId);
         }
+        else
+        {
+            echo mysqli_error($conn);
+        }        
     }
     elseif ($_POST["itemId"]==6) {
         $address=$_POST['address'];
         $zip=$_POST['zip'];
         $city=$_POST['city'];
         $query = "UPDATE shopUser SET address='$address', zip = '$zip',city = '$city'  WHERE id='$ID'";
-        $result = mysqli_query($conn,$query) or die(mysql_error());
+        $result = mysqli_query($conn,$query) ;
         if($result){
-            header("Location: index.php");
+            header("Location: index.php?shopId=".$shopId);
         }
+        else
+        {
+            echo mysqli_error($conn);
+        }        
     }
     elseif ($_POST["itemId"]==7) {
         $discount=$_POST['discount'];
         $query = "UPDATE shopUser SET discount='$discount' WHERE id='$ID'";
-        $result = mysqli_query($conn,$query) or die(mysql_error());
+        $result = mysqli_query($conn,$query) ;
         if($result){
-            header("Location: index.php");
+            header("Location: index.php?shopId=".$shopId);
         }
+        else
+        {
+            echo mysqli_error($conn);
+        }        
     }    
     elseif ($_POST["itemId"]==5) {
             $target_dir = "shopimage/";
@@ -98,9 +125,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else {
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                     $query = "UPDATE shopUser SET avatar='$file_name' WHERE id='$ID'";
-                    $result = mysqli_query($conn,$query) or die(mysql_error());
+                    $result = mysqli_query($conn,$query) ;
                     if($result){
-                        header("Location: index.php");
+                        correctImageOrientation($target_file);
+                        header("Location: index.php?shopId=".$shopId);
                     }
                     
                 } else {

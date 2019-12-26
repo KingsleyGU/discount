@@ -2,11 +2,12 @@
     font-family: "Lato", sans-serif;
   }
   .navbar{
-    background:#909090;
-    color: #ffffff;
+    background:#fff;
+    color: #000;
+    border-bottom:solid 5px #da452d ;
   }
   .navbar a{
-    color: #ffffff;
+    color: #000;
     }
   .navbar .logo{
         /*font-family: 'Pacifico', cursive;*/
@@ -17,7 +18,8 @@
   border-bottom: 5px solid #000;
   }*/
   #banner{
-    background-image: url(../img/Copenhagen.jpg);
+
+    background: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url("../img/food_intro.jpg");
     background-size: cover;
         background-repeat: no-repeat;
         
@@ -41,7 +43,8 @@
     opacity: 0.25;
 }
   #banner .inner{
-        line-height: 3;   
+        line-height: 3;
+        text-align: center;   
   }
   #bannner .button{
     margin-top: 20px;
@@ -50,24 +53,17 @@
     letter-spacing: 3px; 
     color:#fff;
     font-weight: 400;
+    text-align: center;
   }
   #banner h1 span{
     line-height: 1.5;
   }
-  .masthead h2{
-    line-height: 80px;
-  }
   .search-block{
     padding-bottom: 20px;
   }
-
-
-  #portfolio{
-    background: #f3f3f3;
-    background: -moz-linear-gradient(left, #f3f3f3 0%, #f3f3f3 50%, #f7f7f7 0%, #f7f7f7 100%);
-    background: -webkit-linear-gradient(left, #f3f3f3 0%, #f3f3f3 50%, #f7f7f7 0%, #f7f7f7 100%);
-    background: linear-gradient(to right, #f3f3f3 0%, #f3f3f3 50%, #f7f7f7 0%, #f7f7f7 100%);
-  }
+.portfolio{
+  background-color: #eee;
+}
   .wrapper .title{
     color: #fc5b62;
     font-size:20px;
@@ -140,7 +136,7 @@
   background-color: #fff !important;
   color: #1c1c1c !important;
 }
-.discount-btn{
+.discount-choice{
     background-color: transparent;
     border-radius: 0;
     border: 0;
@@ -149,17 +145,14 @@
     font-weight: 700;
     height: 3.5em;
     line-height: 3.65em;
-    padding: 0 2.25em;
     text-align: center;
     text-decoration: none !important;
-    text-transform: uppercase;
     white-space: nowrap;
 }
-.dicount-button{
+.discount-btn{
+    padding: 0 2.25em;
     background-color: transparent;
-    box-shadow: inset 0 0 0 2px #e5474b;
     color: #000;
-    border:2px solid #000;
   }
   a.button{
 color: #000;
@@ -170,12 +163,22 @@ color: #000;
     box-shadow: inset 0 0 0 2px #ffffff;
     color: #ffffff !important;
 }
-.header-btn{
-  background:rgba(255,255,255,0.4);
+.sign-btn{
+  background:#da452d;
   color: #fff !important;
+}
+.header-btn{
   font-weight: bold;
   line-height: 25px; 
-  margin-top: 5px;
+}
+.intro-search-block{
+  width: 250px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+.nav-item{
+   margin-left: 5px !important;
+   line-height: 25px; 
 }
 h2{
   font-size: 20pt;
@@ -183,7 +186,6 @@ h2{
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     line-height: 1.5;
-    text-transform: uppercase;
 }
 
 .profile-image{
@@ -196,7 +198,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .modal-body{
   background:rgba(255,255,255,1);
-  color: #ff0000 !important;
+  color: #000 !important;
   text-align: left;
   
 
@@ -345,6 +347,7 @@ a.shop-detail-link{
 }
 .tag-form{
   display: inline-block;
+  padding: 0px;
 }
 .green-tag-button{
   background-color: #1c1c1c;
@@ -352,15 +355,18 @@ a.shop-detail-link{
 }
 .tags-block{
   overflow: hidden;
-  padding: 10px 0px;
+  padding: 0px 0px 10px 0px;
   height: 45px;
 }
-.location-icon{
+.location-icon, .phone-icon{
   display: inline-block;
-  padding-right: 10px;
+  width: 25px;
 }
 .location-block{
   padding: 10px 0px;
+}
+.location-block a:hover, .phone-block a:hover{
+  text-decoration: none;
 }
 .shop-head{
   text-align: center;
@@ -402,10 +408,6 @@ border-radius: 20px;
   padding: 6px 12px;
   background: rgba(0,0,0,0.15);
   border-radius: 3px 0 0 3px;
-}
-.shop-follow-block{
-  padding: 20px 0px 40px;
-
 }
 .like-image{
   height: 60px;
@@ -451,8 +453,6 @@ form{
   table-layout: fixed;
   font-weight: bold;
   float: left;
-  font-size: 30px;
-
     background-repeat: no-repeat;
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
@@ -507,13 +507,17 @@ form{
 }
 .notice-head{
   text-align:center; 
-  background-color: #000;
+  background-color: #aaa;
   color: #fff;
+  padding: 20px 0px;
 }
 .food-tag-button{
   background:rgba(0,0,0,0.9);
   color: #fff;
 }
+.food-tag-button:hover{
+  color: #fff;
+  }
 .location-button-even
 {
   background:transparent;
@@ -597,5 +601,82 @@ form{
 .language-img{
     max-height: 20px;
   }
-
-  
+textarea {
+    background: none;
+    border-color: #ff0000;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    border: solid 3px #da452d;
+    color: inherit;
+    display: block;
+    outline: 0;
+    padding: 0 1em;
+    text-decoration: none;
+    width: 100%;
+}
+textarea {
+ padding: 0.75em 1em;
+}
+.user-profile-contact,.user-profile-name{
+  min-width: 300px;
+  text-align: left;
+  font-size: 18px;
+}
+.user-profile-form{
+  display: none;
+}
+#subscription-section{
+  background-color: #eee;
+  min-height: 50px;
+  margin-bottom:40px;
+}
+#coupon-section{
+    min-height: 50px;
+  margin-bottom:80px;
+}
+a.subscription-link{
+  text-decoration: none;
+  color: #000;
+}
+.location-block a{
+  height: 20px; 
+  overflow: hidden;
+  display: inline-block;
+}
+a.notice-head-link{
+  text-decoration: none;
+}
+.post-title h2 {
+    color: #333333;
+    font-size: 35px;
+    line-height: 45px;
+    font-weight: 700;
+    margin-top: 24px;
+}
+.answer-desc {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+    padding: 10px 0;
+    color: #8c8c8c;
+}
+a.about-btn {
+  display: inline-block;
+    background-color: transparent;
+    color: #fff;
+    margin: 20px 20px 0px;
+    border: 2px solid #fff;
+    padding: 25px 0px;
+    width: 50%;
+    border-radius: 50px;
+    position: relative;
+  }
+  .search-modal-dialog{
+    margin-top: 100px !important;
+  }
+.search-modal-body{
+  border-radius:10px;
+  background-color: #f0f0f0;
+}

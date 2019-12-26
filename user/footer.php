@@ -12,17 +12,11 @@
         <!-- Footer Social Icons -->
         <div class="col-lg-4 mb-5 mb-lg-0">
           <h4 class="text-uppercase mb-4">Around the Web</h4>
-          <a class="btn btn-outline-light btn-social mx-1" href="#">
+          <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/coolpanda.dk" target="_blank">
             <i class="fab fa-fw fa-facebook-f"></i>
           </a>
-          <a class="btn btn-outline-light btn-social mx-1" href="#">
-            <i class="fab fa-fw fa-twitter"></i>
-          </a>
-          <a class="btn btn-outline-light btn-social mx-1" href="#">
-            <i class="fab fa-fw fa-linkedin-in"></i>
-          </a>
-          <a class="btn btn-outline-light btn-social mx-1" href="#">
-            <i class="fab fa-fw fa-dribbble"></i>
+          <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/coolpanda_dk/" target="_blank">
+            <i class="fab fa-fw fa-instagram"></i>
           </a>
         </div>
 
@@ -61,40 +55,55 @@
   <script src="js/freelancer.min.js"></script>
   <script src="js/form.js"></script>
   <script type="text/javascript">
-    $("#inpt_search").on('focus', function () {
-      $(this).parent('label').addClass('active');
-    });
-
-    $("#inpt_search").on('blur', function () {
-      if($(this).val().length == 0)
-        $(this).parent('label').removeClass('active');
-    });
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.10.2/validator.min.js" ></script>
-    <script type="text/javascript">
-    function like(selector,e,shopId,userId,actionId) {
+    function share(selector,e,userId,shopId,itemId) {
       e.preventDefault();
-      $(selector).hide();
       
-      $.post( "subscribe.php", { userId: userId, shopId: shopId,actionId:actionId })
-      .done(function(){
-        
-        var follow_like_block = $(selector).parent(".shop-follow-block").find(".follower-block-like");
-        var likesNumber = parseInt(follow_like_block.text());
-        if(actionId==1)
-        {
-          $(selector).siblings(".unfollow-image").show();
-          follow_like_block.text(likesNumber+1);
-        }
-        else{
-          $(selector).siblings(".follow-image").show();
-          follow_like_block.text(likesNumber-1);
-        }
-        
+      $.post( "api/shares.php", { userId: userId, shopId: shopId,itemId:itemId })
+      .done(function(data){
+        var url = "/discount/share.php?shareId="+data;
+        window.location.href = url;
       })
       
     };
+    $(".share-search-btn").click(function(){
+      var shareId = $("#share-search-input").val();
+      if(isInt(shareId)){
+      $.get( "api/isShareExist.php", { shareId:shareId })
+        .done(function(data){
+          if(data=="false")
+          {
+            alert("Not a valid share Id");
+          }
+          else
+          {
+            var url = "/discount/share.php?shareId="+shareId;
+            window.location.href = url;
+          }
+        })
+      }
+      else{
+          alert("ShareId must be a number");
+      }
+    })
+    function isInt(value) {
+      return !isNaN(value) && 
+             parseInt(Number(value)) == value && 
+             !isNaN(parseInt(value, 10));
+    }
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.10.2/validator.min.js" ></script>
+    <script type="text/javascript">
+    function changeUrl(lang){
+      var url = window.location.href.split('#')[0];    
+      if (url.indexOf('?') > -1){
+         url += '&lang='+lang;
+      }else{
+         url += '?lang='+lang;
+      }
+      window.location.href = url;
+    }
+  </script>
+
 </body>
 
 </html>

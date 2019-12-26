@@ -1,11 +1,13 @@
 <?php
 session_start();
-require("../dbconnection.php");
+require("../api/dbconnection.php");
+require("../api/common_functions.php");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 $ID = $_POST["shpitemId"];
 $shopId = $_POST["shopId"];
 $target_dir = "shop".$shopId."/";
 $name = $_POST["name"];
+$name_UK = $_POST["name_UK"];
 if (!is_dir($target_dir)) {
 mkdir($target_dir, 0755, true);
 }
@@ -50,16 +52,17 @@ if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
     $d = imagejpeg(imagecreatefromjpeg($target_file), $target_file, 75);
     if(!empty($ID))
     {
-        $query = "UPDATE shopItem SET img_url='$file_name', name='$name' WHERE id='$ID'";
+        $query = "UPDATE shopItem SET img_url='$file_name', name='$name',name_UK='$name_UK' WHERE id='$ID'";
     }
     else
     {
-        $query = "INSERT into `shopItem` (name, img_url, shopId)
-            VALUES ('$name', '$file_name', '$shopId')";
+        $query = "INSERT into `shopItem` (name,name_UK, img_url, shopId)
+            VALUES ('$name', '$name_UK','$file_name', '$shopId')";
     }    
     $result = mysqli_query($conn,$query) or die(mysql_error());
     if($result){
-        header("Location:index.php");
+        correctImageOrientation($target_file);
+        header("Location:index.php?shopId=".$shopId);
     }
     else{
         echo "Sorry, there was an error inserting";
