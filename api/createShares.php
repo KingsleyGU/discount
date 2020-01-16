@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 require("dbconnection.php");
 require("common_functions.php");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -10,7 +7,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	}
 	else{
 	    $target_dir = "../img/shares/";
-	    $file_name = date("Ymd-His").basename($_FILES["fileToUpload"]["name"]);
+	    $file_name = preg_replace('/\s/', '', date("Ymd-His").basename($_FILES["fileToUpload"]["name"]));
 	    $target_file = $target_dir.$file_name;
 	    $uploadOk = 1;
 	    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -67,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	    $shareId = $conn->insert_id;
 	    header("Location: /discount/share.php?shareId=".$shareId);
 	} else {
-	    echo "Error: " . $query . "<br>" . $conn->error;
+	    header("Location: /discount/notification.php?categoryId=2");
 	}
 }
 ?>

@@ -1,9 +1,6 @@
 <?php
 session_start();
-require("api/dbconnection.php");
-$category = 1;
-$shopQuery = "select shopUser.*,(select count(*) from subscription where subscription.shopId = shopUser.id) as subNum,(select count(*) from comment where comment.shopId = shopUser.id) as commentNum from shopUser where shopUser.category='$category'";
-$shopResult = mysqli_query($conn,$shopQuery);
+require("api/getShopList.php");
 ?>
 <style type="text/css">
 	.share-form label{
@@ -15,10 +12,10 @@ $shopResult = mysqli_query($conn,$shopQuery);
   <!-- Masthead -->
   <header class="masthead" id="banner" style="">
 
-        <div class="container inner">
+        <div class="container inner" style="padding:100px 0px;">
           <h1><?php echo $titleArray['desc_food'];?><br />
-          <?php echo $titleArray['come_and_get'];?></h1>
-        <a href="login.php" class="btn alt  about-btn"><?php echo $titleArray['about'];?></a>
+          <?php echo $titleArray['come_and_get'];?><a href="instruction.php" target=”_blank” style="text-decoration: underline; color: #fff;"> <?php echo $titleArray['learn_more'];?>. >></a></h1>
+        <a href="shares.php" class="btn alt  about-btn"><?php echo $titleArray['latest_shares'];?></a>
 
         </div>
   </header>

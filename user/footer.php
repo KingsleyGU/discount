@@ -4,14 +4,13 @@
 
         <!-- Footer Location -->
         <div class="col-lg-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase mb-4">Location</h4>
-          <p class="lead mb-0">Copenhagen 
-            <br>Denmark</p>
+          <h4 class="text-uppercase mb-4"><?php echo $titleArray['location'];?></h4>
+          <p class="lead mb-0">Copenhagen, Denmark</p>
         </div>
 
         <!-- Footer Social Icons -->
         <div class="col-lg-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase mb-4">Around the Web</h4>
+          <h4 class="text-uppercase mb-4"><?php echo $titleArray['follow_us'];?></h4>
           <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/coolpanda.dk" target="_blank">
             <i class="fab fa-fw fa-facebook-f"></i>
           </a>
@@ -22,8 +21,8 @@
 
         <!-- Footer About Text -->
         <div class="col-lg-4">
-          <h4 class="text-uppercase mb-4">Contact us</h4>
-          <p class="lead mb-0">contact us for business cooperation
+          <h4 class="text-uppercase mb-4"><?php echo $titleArray['contact_us'];?></h4>
+          <p class="lead mb-0" style="color:#000;">+45 50233011
             </p>
         </div>
 
@@ -42,6 +41,8 @@
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/jquery/jquery.tmpl.js"></script>
+
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
@@ -55,16 +56,28 @@
   <script src="js/freelancer.min.js"></script>
   <script src="js/form.js"></script>
   <script type="text/javascript">
-    function share(selector,e,userId,shopId,itemId) {
-      e.preventDefault();
+    // function share(selector,e,userId,shopId,itemId) {
+    //   e.preventDefault();
       
-      $.post( "api/shares.php", { userId: userId, shopId: shopId,itemId:itemId })
-      .done(function(data){
-        var url = "/discount/share.php?shareId="+data;
+    //   $.post( "api/shares.php", { userId: userId, shopId: shopId,itemId:itemId })
+    //   .done(function(data){
+    //     var url = "/discount/share.php?shareId="+data;
+    //     window.location.href = url;
+    //   })
+      
+    // };
+    $(".user-search-btn").click(function(){
+      var userInput = $("#user-search-input").val();
+      if(userInput =="")
+      {
+        alert("Please enter the input");
+      }
+      else
+      {
+        var url = "/discount/users.php?userInput="+userInput;
         window.location.href = url;
-      })
-      
-    };
+      }
+    });
     $(".share-search-btn").click(function(){
       var shareId = $("#share-search-input").val();
       if(isInt(shareId)){
@@ -91,7 +104,8 @@
              !isNaN(parseInt(value, 10));
     }
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.10.2/validator.min.js" ></script>
+  <script src="vendor/bootstrap/js/validator.min.js" ></script>
+  <script src="js/platform.js"></script>
     <script type="text/javascript">
     function changeUrl(lang){
       var url = window.location.href.split('#')[0];    
@@ -102,6 +116,44 @@
       }
       window.location.href = url;
     }
+    function loadShares(url)
+    {
+      $(window).on('load', function(){
+        $.get(url)
+        .done(function(data){
+          var sharesData = JSON.parse(data);
+          $("#shareTemplate").tmpl({sharesData:sharesData}).appendTo("#shares-Block");
+        })
+      });
+    }
+    function loadShopItems(url){
+      $(window).on('load', function(){
+          $.get(url)
+          .done(function(data){
+            var itemsData = JSON.parse(data);
+            $("#shopItemTemplate").tmpl({itemsData:itemsData}).appendTo("#shopItemsBlock");
+          })
+      });
+    }
+    function getUserProfile()
+    {
+      var OSName = platform.os;
+      var ipaddress="<?php echo $ipaddress;?>";
+      var userProfile = md5(OSName+ipaddress);
+      return userProfile; 
+    }
+    $(document).ready(function(){
+          $('.input100').each(function(){
+                $(this).focus();
+                if($(this).val().trim() != "") {
+                    $(this).addClass('has-val');
+                }
+                else {
+                    $(this).removeClass('has-val');
+                }  
+                $(this).blur();
+        })
+    });
   </script>
 
 </body>

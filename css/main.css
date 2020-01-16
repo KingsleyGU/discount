@@ -19,7 +19,7 @@
   }*/
   #banner{
 
-    background: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url("../img/food_intro.jpg");
+    background: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url("../img/newyear.jpg");
     background-size: cover;
         background-repeat: no-repeat;
         
@@ -50,7 +50,6 @@
     margin-top: 20px;
   }
   #banner h1{
-    letter-spacing: 3px; 
     color:#fff;
     font-weight: 400;
     text-align: center;
@@ -180,9 +179,6 @@ color: #000;
    margin-left: 5px !important;
    line-height: 25px; 
 }
-h2{
-  font-size: 20pt;
-}
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     line-height: 1.5;
@@ -225,7 +221,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .wrap-login{
   background-color: #fff;
-  padding: 50px 5%;
+  padding: 20px 5%;
 
 }
 .coupon {
@@ -256,12 +252,13 @@ a.shop-detail-link{
   text-decoration:none; 
 }
 .logo-img{
-  height: 60px;
+  height: 50px;
 }
 .error-messgae{
   color: #e5474b;
   font-weight: bold;
   font-size: 20px;
+  margin-bottom:30px
 }
 .shop-item .desc{
   height: 60px;
@@ -312,7 +309,7 @@ a.shop-detail-link{
 }
 .item-name{
   text-align: center;
-  font-size: 20px;
+  font-size: 14px;
 }
 .ratio-4-3{
   width:100%;
@@ -329,12 +326,13 @@ a.shop-detail-link{
 }
 .shop-profile-icon{
   color: #000;
-  padding-right:20px; 
+  margin-right:15px; 
 }
 .shop-contact-info{
   font-size: 18px;
   line-height: 35px;
 }
+
 .tag-button-icon{
   padding-left: 20px;
 }
@@ -362,15 +360,11 @@ a.shop-detail-link{
   display: inline-block;
   width: 25px;
 }
-.location-block{
-  padding: 10px 0px;
-}
 .location-block a:hover, .phone-block a:hover{
   text-decoration: none;
 }
 .shop-head{
   text-align: center;
-  line-height: 100px;
   color: #000;
 }
 #shop-display{
@@ -410,9 +404,7 @@ border-radius: 20px;
   border-radius: 3px 0 0 3px;
 }
 .like-image{
-  height: 60px;
-  width: 60px;
-  float: left;
+  display: inline-block;
 }
 .follower-block{
   width: 50%;
@@ -422,6 +414,7 @@ border-radius: 20px;
 .follower-block-item{
   width: 100%;
   display: inline-block;
+  font-size: 18px;
 }
 .like-button{
   float: left;
@@ -430,7 +423,7 @@ border-radius: 20px;
   display: inline-block;
 }
 .follower-block-content{
-  width: 40px;
+  width: 60px;
   text-align: left;
 }
 
@@ -562,7 +555,7 @@ form{
  border-top-left-radius: 3px;
  background: #E24128;
  color: #fff;
- height: 150px;
+ height: 250px;
  font-size: 25px;
  font-weight: bold;
   writing-mode: vertical-rl;
@@ -630,7 +623,6 @@ textarea {
 #subscription-section{
   background-color: #eee;
   min-height: 50px;
-  margin-bottom:40px;
 }
 #coupon-section{
     min-height: 50px;
@@ -641,7 +633,7 @@ a.subscription-link{
   color: #000;
 }
 .location-block a{
-  height: 20px; 
+  height: 23px; 
   overflow: hidden;
   display: inline-block;
 }
@@ -668,8 +660,7 @@ a.about-btn {
     color: #fff;
     margin: 20px 20px 0px;
     border: 2px solid #fff;
-    padding: 25px 0px;
-    width: 50%;
+    padding: 25px 25px;
     border-radius: 50px;
     position: relative;
   }
@@ -679,4 +670,98 @@ a.about-btn {
 .search-modal-body{
   border-radius:10px;
   background-color: #f0f0f0;
+}
+  .share-image-block {
+    width: 100%;
+    background: url(img/food_intro.jpg);
+    background-size: cover;
+    min-height: 350px;
+    background-position: center center;
+}
+.share-profile-image{
+   width: 80px;
+    display: block;
+    background-size: cover;
+}
+.author-name{
+    font-weight: 600;
+    color: #000000;
+    text-decoration: underline;
+}
+.share-author-info{
+  font-size: 20px;
+  font-family: "Poppins", Arial, sans-serif;
+}
+a.like-btn {
+  display: inline-block;
+    background-color: transparent;
+    color: #da452d;
+    border-radius: 50px;
+}
+a.like-btn:hover{
+  color: #f00;
+}
+.share-head{
+  font-family: 'Kaushan Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  text-decoration: none;
+  pointer-events: none;
+}
+.even-line-record{
+  background-color: #eee;
+}
+.search-result-item{
+  padding: 10px;
+}
+.share-image{
+  display: block;
+  width: 100px;
+}
+.follower-icon-image{
+  width: 20px;
+}
+.like-image{
+  font-weight: bold;
+    margin-top: 10px;
+  background-color: #da452d;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 18px;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  -o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  -ms-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+.coupon-button-block{
+  padding: 10px 20px;
+   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  -o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  -ms-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6); 
+    border-radius: 5px;
+    background-color: #da452d;
+    color: #fff;
+}
+.coupon-button-block:hover{
+  background-color: #ca351d;
+}
+.like-heart{
+  -webkit-animation: pulse 1.5s ease infinite;
+  -moz-animation: pulse 1.5s ease infinite;
+  animation: pulse 1.5s ease infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+.share-contact-info .author-name, .share-contact-info{
+  font-size: 15px;
 }

@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $result = mysqli_query($conn,$query);
         if($result){
             $_SESSION["name"] = $name;
-            header("Location: personal.php");
+            header("Location: /profile.php?userId=".$userId);
         }
         else
         {
@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $result = mysqli_query($conn,$query);
         if($result){
             $_SESSION["phone"] = $phone;
-            header("Location: personal.php");
+            header("Location: /profile.php?userId=".$userId);
         }
         else
         {
@@ -78,7 +78,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     if($result){
                         correctImageOrientation($target_file);
                         $d=imagejpeg(imagecreatefromjpeg($target_file), $target_file, 75);
-                        header("Location: ../personal.php");
+                        header("Location: /profile.php?userId=".$userId);
                     }
                     
                 } else {

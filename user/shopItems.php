@@ -3,9 +3,10 @@
     <div class="container">
 
       <!-- Portfolio Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0"><?php
+      <a href="details.php?shopId=<?php echo $shopId?>" style="color: #000;"><h2 style="text-align: center;"><?php
+          echo $shopName." ";
           echo $titleArray['recommendation'];
-      ?></h2>
+      ?></h2></a>
 
       <!-- Icon Divider -->
       <div class="divider-custom">
@@ -17,38 +18,31 @@
       </div>
 
       <!-- Portfolio Grid Items -->
-      <div class="row">
+      <div class="row" id="shopItemsBlock">
         <!-- Portfolio Item 1 -->
-        <?php 
-          require("api/getShopItems.php");
-          foreach ($items as $key => $item) {
-        ?>
-        <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#itemModal<?php echo $item['id'];?>">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-            </div>
-               <div class="img-responsive ratio-4-3" style="background-image:url(<?php echo "shop/shop".$shopId."/".$item['img_url'];?>)"></div>
- 
-            <div class="item-name" ><?php  
-            if($lang =="cn")
-            {
-              echo empty($item['name'])? $item['name_UK']:$item['name'];
-            }
-            else
-            {
-              echo empty($item['name_UK'])? $item['name']:$item['name'];
-            }
-            
-            ?></div>
-          </div>
-        </div>
 
-        <?php
-        }
-        ?>
 
       </div>
       <!-- /.row -->
 
     </div>
   </section>
+
+
+<script id="shopItemTemplate" type="text/x-jQuery-tmpl">
+{{each(i, data) itemsData}}
+        <div class="col-md-6 col-lg-4">
+        <div class="portfolio-item mx-auto" data-toggle="modal">
+          <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+          </div>
+             <div class="img-responsive ratio-4-3" style="background-image:url('<?php echo "shop/shop".$shopId."/";?>${data.img_url}')"></div>
+
+          <div class="item-name" >
+          {{if "<?php echo $lang;?>" == "cn"}} ${data.name}
+          {{else}} ${data.name_UK}
+          {{/if}}
+          </div>
+        </div>
+      </div>
+{{/each}}
+</script>

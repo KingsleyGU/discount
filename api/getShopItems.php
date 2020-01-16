@@ -7,4 +7,5 @@ $items = array();
 while($row = $shopItemResult->fetch_assoc()) { 
 	array_push($items, $row);
 }
+echo json_encode($items);
 ?>

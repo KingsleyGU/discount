@@ -1,16 +1,10 @@
   <section class="page-section portfolio" id="shop-display">
     <div class="container">
       <h2 class="shop-head">
-      <?php
-        if($category ==1)
-        {
-          echo "<span class='category-head'>".$titleArray['eat_in']."</span><img src='img/coolpanda_eating.png' class='logo-img'/><span class='category-head'>".$titleArray['cph']."</span>";
-        }
-        elseif($category ==3)
-        {
-          echo "<span class='category-head'>".$titleArray['purchase']."</span><img src='img/panda_shopping.png' class='logo-img'/><span class='category-head'>".$titleArray['cph']."</span>";
-        }
-      ?></h2>
+
+         <span class='category-head'><?php echo $titleArray['eat_in'];?></span><img src='img/coolpanda_eating.png' class='logo-img'/><span class='category-head'><?php echo $titleArray['cph'];?></span>
+        
+      </h2>
 
       <div class="row">
 
@@ -29,8 +23,8 @@
                     $avatar = "panda.png";
                   }
                   ?>
-                 <div class="img-responsive ratio-4-3" style="background-image:url(<?php echo "./shop/shopimage/".$avatar;?>)"></div>
-                 <h3><?php 
+                 <div class="img-responsive ratio-4-3" style="background-image:url('<?php echo "./shop/shopimage/".$avatar;?>')"></div>
+                 <h3 style="font-size: 18px; margin: 10px 0px;"><?php 
 
                     if($lang=="cn"){
                       $shopName =  $shopRecord->name;
@@ -49,41 +43,35 @@
                   <div class="phone-block m-t-10 m-b-10">
                      <a href="tel:<?php echo "(+45)".$shopRecord->phone;?>"><i class="fa fa-phone phone-icon" aria-hidden="true"></i><?php echo "(+45)  ".$shopRecord->phone;?></a>
                   </div>
+                  <div class="phone-block m-t-10 m-b-10">
+                    <b><?php echo $titleArray['exchange'];?></b>:
+                     <?php 
+                        echo $shopRecord->firstNum." <i class='fas fa-heart text-danger'></i> <i class='fas fa-exchange-alt'></i> ".$shopRecord->firstDiscount."%";
+                        if(!empty($shopRecord->secondDiscount)){
+                          echo "&nbsp;&nbsp;&nbsp;".$shopRecord->secondNum." <i class='fas fa-heart text-danger'></i> <i class='fas fa-exchange-alt'></i> ".$shopRecord->secondDiscount."%";
+                        }
+                     ?>
+                  </div>
 
 
-
-                  <div class="shop-follow-block m-b-30" style="height: 25px;">
+                  <div class="shop-follow-block m-b-30 text-center" style="height: 25px; margin-top: 10px;">
                     <?php
                       if(isset($_SESSION["userId"]))
                       {
                         $userId = $_SESSION["userId"];
                     ?>
-    
-                      
-                        <img src="img/liked.svg" class="like-image unfollow-image" data-toggle="modal" data-target="#portfolioModal<?php echo $itemRow;?>">
+                        <span class="like-image unfollow-image" data-toggle="modal" data-target="#portfolioModal<?php echo $itemRow;?>"><?php echo $titleArray['go_collect'];?>&nbsp;<i class="fas fa-heart fa-lg"></i></span>
+
                     <?php
                          
                       }
                       else{
                     ?>
                     <a href="login.php"> 
-                    <img src="img/like.svg" class="like-image follow-image" ></a>
+                    <span class="like-image unfollow-image"><?php echo $titleArray['go_collect'];?>&nbsp;<i class="fas fa-heart fa-lg"></i></span></a>
                     <?php
                       }
                     ?>
-                      
-
-                      
-                      <span class="follower-block">
-                        <div class="follower-block-item">
-                          <span class="follower-block-head"><i class="fas fa-share-square"></i></span>
-                          <span class="follower-block-content follower-block-comment"><?php echo $shopRecord->commentNum;?></span>
-                        </div>
-                        <div class="follower-block-item">
-                          <span class="follower-block-head"><i class="fas fa-heart"></i></span>
-                          <span class="follower-block-content follower-block-like"><?php echo $shopRecord->subNum;?></span>
-                        </div>
-                      </span>
                     
                   </div>
 
@@ -106,7 +94,7 @@
                     <div class="container">
                       <div class="row justify-content-center">
                         <div class="col-lg-8">
-                        <h3 class="portfolio-modal-title mb-0">分享内容如下</h3>
+                        <h3 class="portfolio-modal-title mb-0"><?php echo $titleArray['share_content'];?></h3>
                           <div class="divider-custom">
                             <div class="divider-custom-line"></div>
                             <div class="divider-custom-icon">
@@ -115,24 +103,24 @@
                             <div class="divider-custom-line"></div>
                           </div>
                           <!-- Portfolio Modal - Image -->
-                          <img class="img-fluid rounded mb-5" src="<?php echo "./shop/shopimage/".$avatar;?>" alt="">                        
-                        <form class="share-form" method="post" action="api/createShares.php" enctype="multipart/form-data" >
+                          <img class="img-fluid rounded mb-5" src="<?php echo "./shop/shopimage/".$avatar;?>" alt="">  
+                        <form class="share-form" method="post" action="api/createShares.php" enctype="multipart/form-data" > 
                           <div class="wrap-input100 validate-input m-b-50" data-validate = "Enter title">
-                            <label for="description">输入标题*：</label>
+                            <label for="description"><?php echo $titleArray['title'];?>:</label>
                             <input class="input100" value="Awesome!!! <?php echo $shopName;?>" type="text" name="title"  required/>
                           </div>
                           <div class="wrap-input100 validate-input m-b-30" >
-                          <label for="fileToUpload">选择自定义图片：</label>
+                          <label for="fileToUpload"><?php echo $titleArray['image'];?>:</label>
                           <input class="input100" type="file" name="fileToUpload" id="fileToUpload" />
                           </div>
                           <input type="hidden" name="shopId" value="<?php echo $shopRecord->id;?>">
                           <input type="hidden" name="userId" value="<?php echo $userId;?>">
                           <input type="hidden" name="itemId" value="0">
                           <div class="field">
-                            <label for="description">请输入分享的描述*</label>
-                            <textarea name="description" id="description" rows="6">大家快来一起跟我编程点赞狂魔吧，点赞获取优惠券。</textarea>
+                            <label for="description"><?php echo $titleArray['description'];?>:</label>
+                            <textarea name="description" id="description" rows="6"><?php echo $titleArray['default_description'];?></textarea>
                           </div>
-                              <input type="submit" class="login100-form-btn m-t-20" value="submit">
+                              <input type="submit" class="login100-form-btn m-t-20" value="<?php echo $titleArray['generate'];?>">
                         </form>
                           <!-- Portfolio Modal - Title -->
                           
@@ -141,7 +129,7 @@
 
                           <button class="btn btn-primary" href="#" data-dismiss="modal">
                             <i class="fas fa-times fa-fw"></i>
-                            Close Window
+                            <?php echo $titleArray['close_window'];?>
                           </button>
                         </div>
                       </div>

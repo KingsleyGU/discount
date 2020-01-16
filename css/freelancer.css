@@ -376,11 +376,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h1, .h1 {
-  font-size: 2.5rem;
-}
-
-h2, .h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 h3, .h3 {
@@ -6089,12 +6085,15 @@ a.close.disabled {
 }
 
 .modal-open {
-  overflow: hidden;
+  overflow: hidden !important; 
+  width: 100%;
+
 }
 
 .modal-open .modal {
   overflow-x: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal {
@@ -6103,10 +6102,11 @@ a.close.disabled {
   left: 0;
   z-index: 1050;
   display: none;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   overflow: hidden;
   outline: 0;
+   background: rgba(0,0,0,.6);
 }
 
 .modal-dialog {
@@ -10605,7 +10605,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .divider-custom .divider-custom-icon {
-  color: #2c3e50 !important;
+  color: #000 !important;
   font-size: 2rem;
 }
 
@@ -10656,6 +10656,8 @@ a.text-dark:hover, a.text-dark:focus {
  font-weight: 700;
     -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
     transition: padding-top 0.3s, padding-bottom 0.3s;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 
@@ -10694,7 +10696,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .masthead {
-padding: 13em 0 11em 0;
+padding: 80px 0 80px 0;
 }
 
 .masthead .masthead-heading {
@@ -10713,7 +10715,7 @@ padding: 13em 0 11em 0;
 @media (min-width: 992px) {
   .masthead {
 /*    padding-top: calc(6rem + 104px);*/
-    padding: 13em 0 11em 0;
+    padding: 80px 0 80px 0;
   }
   .masthead .masthead-heading {
     font-size: 4rem;
@@ -10725,8 +10727,8 @@ padding: 13em 0 11em 0;
 }
 @media (max-width: 400px) {
   .masthead {
-   padding-top: calc(10rem + 14px);
-    padding-bottom: 6rem;
+   padding-top: 80px;
+    padding-bottom: 80px;
   }
 }
 .portfolio {
@@ -10757,18 +10759,6 @@ padding: 13em 0 11em 0;
 
 .portfolio .portfolio-item .portfolio-item-caption .portfolio-item-caption-content {
   font-size: 1.5rem;
-}
-
-.portfolio-modal .portfolio-modal-title {
-  font-size: 2.25rem;
-  line-height: 2rem;
-}
-
-@media (min-width: 992px) {
-  .portfolio-modal .portfolio-modal-title {
-    font-size: 3rem;
-    line-height: 2.5rem;
-  }
 }
 
 .portfolio-modal .close {

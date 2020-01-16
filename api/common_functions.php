@@ -30,13 +30,13 @@ function time_elapsed_string($datetime, $full = false) {
 function translateTagbyId($tagCategory,$titleArray)
 {
     if($tagCategory == 1){
-        echo $titleArray['chuan'];
+        echo $titleArray['chuan']."<i class='fas fa-pepper-hot text-danger'></i>";
     }
     elseif ($tagCategory == 2) {
         echo $titleArray['cantonese'];
     }
     elseif ($tagCategory == 3) {
-        echo $titleArray['xiang'];
+        echo $titleArray['xiang']."<i class='fas fa-pepper-hot text-danger'></i>";
     }   
     elseif ($tagCategory == 4) {
         echo $titleArray['northeast'];
@@ -49,7 +49,10 @@ function translateTagbyId($tagCategory,$titleArray)
     }  
     elseif ($tagCategory == 7) {
         echo $titleArray['design'];
-    }        
+    }   
+    elseif ($tagCategory == 8) {
+        echo $titleArray['chinese_buffet'];
+    }      
 }
 function correctImageOrientation($filename) {
   if (function_exists('exif_read_data')) {
@@ -78,5 +81,18 @@ function correctImageOrientation($filename) {
       } // if there is some rotation necessary
     } // if have the exif orientation info
   } // if function exists      
+}
+function isCurrentUser($userId)
+{
+    return (!empty($_SESSION['userId']))&&$_SESSION['userId']==$userId;
+}
+function isExpired($generatedDate){
+    $date = new DateTime(date("Y-m-d",strtotime('-7 days')));
+    if(date_create($generatedDate)<$date){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 ?>

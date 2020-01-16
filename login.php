@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 <?php include 'user/header.php';?>  
           <section id="login" class="masthead">
-            <div class="container login-container" style="padding: 30px 0px;">
+            <div class="container login-container">
               <div class="row justify-content-center" style="width:100%;">
                 <div class="col-lg-8 wrap-login">
                   <!-- Portfolio Modal - Title -->
@@ -45,24 +45,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                   <!-- Icon Divider -->
                   <form method="post" action="#" id="loginForm" style="padding-top:0px;">
                       <div class="error-messgae"><?php echo $errorMessage;?></div>
-                      <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter email">
+                      <div class="wrap-input100 validate-input m-b-30" data-validate = "Enter email">
                         <input class="input100" value="<?php echo $email;?>" type="email" class="form-control" name="email" id="email" data-error="Bruh, that email address is invalid" required/>
-                        <span class="focus-input100" data-placeholder="Email"></span>
+                        <span class="focus-input100" data-placeholder="Email:*"></span>
                       </div>
 
-                      <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                      <div class="wrap-input100 validate-input m-b-30" data-validate="Enter password">
                         <input value="<?php echo $password;?>" type="password" name="password" id="password" class="input100"/>
-                        <span class="focus-input100" data-placeholder="Password"></span>
+                        <span class="focus-input100" data-placeholder="<?php echo $titleArray['password'];?>:*"></span>
                       </div>   
 
-                      <input type="submit" value="提交" class="login100-form-btn" />
-                      <div class="p-t-50">
+                      <input type="submit" value="<?php echo $titleArray['submit'];?>" class="login100-form-btn" />
+                      <div class="p-t-40">
                           <span class="txt1">
-                            Don’t have an account?
+                            <?php echo $titleArray['not_have_account'];?>
                           </span>
 
                           <a href="register.php" class="txt2">
-                            Sign up
+                            <?php echo $titleArray['register'];?>
+                          </a>
+                      </div>
+                      <div class="p-t-30">
+                          <a href="forgetpassword.php" class="txt2">
+                            <?php echo $titleArray['forget_password'];?>
                           </a>
                       </div>
                   </form>

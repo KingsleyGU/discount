@@ -1,5 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require("../api/dbconnection.php");
+require("../api/common_functions.php");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $ID = $_POST["id"];
     $shopId = $ID;
@@ -83,7 +87,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         {
             echo mysqli_error($conn);
         }        
-    }    
+    } 
+    elseif ($_POST["itemId"]==8) {
+        $website=$_POST['website'];
+        $query = "UPDATE shopUser SET website='$website' WHERE id='$ID'";
+        $result = mysqli_query($conn,$query) ;
+        if($result){
+            header("Location: index.php?shopId=".$shopId);
+        }
+        else
+        {
+            echo mysqli_error($conn);
+        }        
+    }     
     elseif ($_POST["itemId"]==5) {
             $target_dir = "shopimage/";
             $file_name = date("Ymd-His").basename($_FILES["fileToUpload"]["name"]);

@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 <?php include 'user/header.php';?>   
           <section id="register" class="masthead">
-            <div class="container login-container" style="padding: 30px 0px;">
+            <div class="container login-container">
               <div class="row justify-content-center" style="width:100%;">
                 <div class="col-lg-8 wrap-login">
                   <!-- Portfolio Modal - Title -->
@@ -46,33 +46,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                   <div class="error-messgae"><?php echo $errorMessage;?></div>
                   <!-- Icon Divider -->
                   <form method="post" action="register.php" id="loginForm">
-                    <div class="wrap-input100 validate-input m-b-50" data-validate = "Enter name">
+                    <div class="wrap-input100 validate-input m-b-30" data-validate = "Enter name">
                       <input class="input100" value="<?php echo $name;?>" type="text" name="name" id="name"  required/>
-                      <span class="focus-input100" data-placeholder="Name"></span>
+                      <span class="focus-input100" data-placeholder="<?php echo $titleArray['name'];?>:*"></span>
 
                     </div>
-                      <div class="wrap-input100 validate-input m-b-50" data-validate = "Enter email">
+                      <div class="wrap-input100 validate-input m-b-30" data-validate = "Enter email">
                         <input class="input100" value="<?php echo $email;?>" type="email" name="email" id="email" data-error="Bruh, that email address is invalid" required/>
-                        <span class="focus-input100" data-placeholder="Email"></span>
+                        <span class="focus-input100" data-placeholder="Email:*"></span>
                       </div>
-                     <div class="wrap-input100 validate-input m-b-50" data-validate = "Enter phone">
+                     <div class="wrap-input100 validate-input m-b-30" data-validate = "Enter phone">
                       <input class="input100" value="<?php echo $phone;?>" pattern="^[0-9]{1,}$" maxlength="15" type="text" name="phone" id="phone" />
-                      <span class="focus-input100" data-placeholder="Phone"></span>
+                      <span class="focus-input100" data-placeholder="<?php echo $titleArray['phone'];?>"></span>
                     </div>  
 
-                      <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                        <input value="<?php echo $password;?>" type="password" name="password" id="password" class="input100"/>
-                        <span class="focus-input100" data-placeholder="Password"></span>
+                      <div class="wrap-input100 validate-input m-b-30" data-validate="Enter password">
+                        <input value="<?php echo $password;?>" type="password" name="password" id="password" class="input100" required/>
+                        <span class="focus-input100" data-placeholder="<?php echo $titleArray['password'];?>:*"></span>
                       </div>  
 
-                      <input type="submit" value="提交" class="login100-form-btn" />
+                      <input type="submit" value="<?php echo $titleArray['submit'];?>" class="login100-form-btn" />
                       <div class="p-t-50">
                           <span class="txt1">
-                            Already have an account?
+                            <?php echo $titleArray['already_have_account'];?>
                           </span>
 
                           <a href="login.php" class="txt2">
-                            Log in
+                            <?php echo $titleArray['login'];?>
                           </a>
                       </div>
                   </form>

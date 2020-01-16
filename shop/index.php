@@ -98,6 +98,16 @@ $shopTags = array();
 			    <input value="submit" type="submit" class="alt discount-btn red-btn message-btn">
 			</form>	
 		</div>	
+  		<div class="change-trigger">
+			<h3><i class="fa fa-file-invoice-dollar" aria-hidden="true"></i>website</h3>
+	  		<p class="masthead-subheading font-weight-light mb-0 item-content"><?php echo $shopRecord->website;?></p>
+			<form action="profile.php" method="post" class="profileForm">
+				<input type="hidden" name="id" value="<?php echo $shopId;?>"/>
+				<input type="hidden" name="itemId" value="8"/>
+			    <input type="text" name="website" value="<?php echo $shopRecord->website;?>" placeholder="website" />
+			    <input value="submit" type="submit" class="alt discount-btn red-btn message-btn">
+			</form>	
+		</div>	
       <div class="change-trigger">
       		<h3><i class="fa fa-envelope" aria-hidden="true"></i>email:</h3>
 	      <p class="masthead-subheading font-weight-light mb-0 item-content"><?php echo $shopRecord->email;?></p>
@@ -147,7 +157,7 @@ $shopTags = array();
 		</div>
 
       <?php
-		for($x = 1; $x < 8; $x++) {
+		for($x = 1; $x < 9; $x++) {
 
 			if(!in_array($x, $shopTags,false))
 			{

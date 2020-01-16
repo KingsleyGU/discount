@@ -1,9 +1,12 @@
+<?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+session_start();
+?> 
 <style type="text/css">
   .use-coupon-block{
     cursor: pointer;
-  }
-  .coupon-ribbon{
-    display: none;
   }
   .use-coupon-image{
     height: 60px;
@@ -11,71 +14,74 @@
   }
 </style>
 <?php 
-session_start();
-require("api/dbconnection.php");
-$couponId = $_GET["couponId"];
-$query = "select coupon.*,shopUser.name as shopName,shopUser.avatar from coupon  left join shopUser on coupon.shopId = shopUser.id where coupon.id='$couponId'";
-$result = mysqli_query($conn,$query) or die(mysql_error());
-$rows = mysqli_num_rows($result);
-if($rows==1){
-	$couponRecord = mysqli_fetch_object($result);  
-	$shopName = $couponRecord->shopName;
-	$shopId = $couponRecord->shopId;
-	$shopImage = $couponRecord->avatar;
-  if(is_null($shopImage))
-  {
-    $shopImage = "panda.png";
-  }
-	$shopDiscount = $couponRecord->discount;
-	$couponDate = $couponRecord->createdDate;
-	$couponUser = $couponRecord->userId;
-}
-  $expired = 0;
-  $date_today = new DateTime(date("Y-m-d"));
-  if(date_create($couponDate)>$date_today)
-  {
-    $expired = 0;
-  }
-  else{
-    $expired = 1;
-  }  
-?> 
-<?php include 'user/header.php';?>
+include 'user/header.php';
+require("api/getCoupon.php");
+?>
 <section id="coupon" class="masthead">
 	<div class="container inner ">
+  <?php if(isCurrentUser($couponUser)){?>
+          <?php if($couponRecord->used!="1"&&$expired==0){?>
+          <div style="text-align:center; margin: 30px 0px;" class=" ">
+            <span class="use-coupon-block coupon-button-block" data-toggle="modal" data-target="#use-coupon-modal"><i class='fa fa-file-invoice-dollar'></i>&nbsp;<?php echo $titleArray['use_coupon'];?></span>
+          </div>
+          <?php } ?>
           <div class="coupon" style="position: relative;">
-            <?php 
-              if($expired ==1)
-              {
-            ?>
-              <span class="coupon-ribbon">
-                <span>已使用</span>
-              </span>
-            <?php 
-              }
-            ?>              
+          
+              <span class="coupon-ribbon" style="<?php if($ribbonContent==""){ echo "display:none;"; }?>">
+                <span><?php echo $ribbonContent;?></span>
+              </span>  
+
             <h3><?php echo $shopName;?></h3>
             <img src="<?php echo "./shop/shopimage/".$shopImage;?>" alt="Avatar" style="width:100%;">
             <div class="container" style="background-color:white">
-              <h3><b><?php echo $shopDiscount;?>% OFF</b></h3> 
-              <p class="disclosure">本折扣券只限当天有效，而且最终的解释权归相应的餐馆或者商铺所有，一张折扣券只限使用一次</p>
+              <h3><b><?php echo $shopDiscount;?>% OFF</b> &nbsp;&nbsp;(<?php echo $couponRecord->userLikesNum;?><i class="fas fa-heart text-danger"></i>)</h3> 
+              <p class="disclosure"><?php echo $titleArray['coupon_discolsure'];?></p>
             </div>
             <div class="container">
-              <p class="promo-code">折扣券编号: <span class="promo"><?php echo $shopId.$couponUser.date_format(date_create($couponDate), 'YmdH-i-s');?></span></p>
-              <p class="expire-code">有效期: <span class="promo"><?php echo date_format(date_create($couponDate), 'jS F Y');?> 23:59:59</span></p>             
+              <p class="promo-code"><?php echo $titleArray['coupon_number'];?>: <span class="promo"><?php echo $shopId.$couponUser.date_format(date_create($couponDate), 'YmdH-i-s');?></span></p>
+              <p class="expire-code"><?php echo $titleArray['valida_to'];?>: <span class="promo"><?php echo date('Y F j,',strtotime($couponDate."+7 day"));?> 23:59:59</span></p>             
             </div>
           </div>
-          <div style="text-align:center; margin-top: 20px;" class="use-coupon-block">
-            <img src="img/like.svg" class=" use-coupon-image" >
-          </div>
+    <?php 
+    } else{?>
+      <h2 class="text-center"><?php echo $titleArray['not_owner'];?></h2>
+     <?php }?>
 	</div>
 
 </section>
 
 
 <?php include 'user/footer.php';?>
-<script type="text/javascript">
-$( ".use-coupon-block" ).click(function() {
-  $( ".coupon-ribbon" ).show( "slow");
-});
-</script>
+      <div class="portfolio-modal modal fade" id="use-coupon-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal-dialog " role="document">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">
+              <i class="fas fa-times"></i>
+            </span>
+          </button>
+          <div class="modal-body text-center">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                <h3 class="portfolio-modal-title mb-0"><?php echo $titleArray['use_coupon'];?></h3>
+                  <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon">
+                      <i class="fas fa-fish"></i>
+                    </div>
+                    <div class="divider-custom-line"></div>
+                  </div>
+
+                  <p class="text-left" style="font-weight: bold; width: 100%;"><?php echo $titleArray['coupon_use_once'];?></p>
+                  <form class="share-form" method="post" action="api/useCoupon.php" enctype="multipart/form-data" > 
+                    <input type="hidden" name="couponId" value="<?php echo $_GET['couponId'];?>">
+                    <input type="submit" class="login100-form-btn m-t-20" value="<?php echo $titleArray['continue'];?>">
+                  </form>             
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
