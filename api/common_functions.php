@@ -87,7 +87,7 @@ function isCurrentUser($userId)
     return (!empty($_SESSION['userId']))&&$_SESSION['userId']==$userId;
 }
 function isExpired($generatedDate){
-    $date = new DateTime(date("Y-m-d",strtotime('-7 days')));
+    $date = new DateTime(date("Y-m-d",strtotime('-30 days')));
     if(date_create($generatedDate)<$date){
         return true;
     }

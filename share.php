@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 require("api/getShare.php");
 ?>
 <?php include 'user/header.php';?>
@@ -134,19 +135,19 @@ require("api/getShare.php");
                 ?> 
                 <div class="col-lg-6 col-md-12 ml-2">              
           					<div class="author  mt-4 mb-4 d-flex align-items-center">
-          					    <a href="profile.php?userId=<?php echo $share['userId']; ?>" ><img class="share-profile-image" src="<?php echo $userAvatar;?>"> </a>
+          					    <a href="profile.php?userId=<?php echo $share['userId'];?>" target="_blank"><img class="share-profile-image" src="<?php echo $userAvatar;?>"> </a>
           					    <div class="ml-3 share-author-info">
-          					        <a class="author-name" href="#"><?php echo $share['userName'];?></a>
+          					        <a class="author-name" href="profile.php?userId=<?php echo $share['userId'];?>" target="_blank"><?php echo $share['userName'];?></a>
           					        <div><span class="text-muted"><?php echo $titleArray['post_by'];?>,<?php echo time_elapsed_string($share['created_time']);?></span></div>
           					    </div>
           					</div>
                     <div class="about-text">                 
                       <h2 class="heading"><?php echo $share['title'];?></h2>
                        <div class="shop-location shop-contact-info">
-                          <i class="fa fa-dollar-sign shop-profile-icon" aria-hidden="true"></i><?php 
-                              echo $share['firstNum']." <i class='far fa-heart text-danger'></i> <i class='fas fa-exchange-alt'></i> ".$share['firstDiscount']."%";
+                          <b><?php echo $titleArray['exchange'];?></b>:<?php 
+                              echo $share['firstNum']." <i class='fas fa-heart text-danger'></i> <i class='fas fa-exchange-alt'></i> ".$share['firstDiscount']."%";
                               if(!empty($share['secondDiscount'])){
-                                echo "&nbsp;&nbsp;&nbsp;".$share['secondNum']." <i class='far fa-heart text-danger'></i> <i class='fas fa-exchange-alt'></i> ".$share['secondDiscount']."%";
+                                echo "&nbsp;&nbsp;&nbsp;".$share['secondNum']." <i class='fas fa-heart text-danger'></i> <i class='fas fa-exchange-alt'></i> ".$share['secondDiscount']."%";
                               }
                            ?>
                       </div>   

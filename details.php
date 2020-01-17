@@ -44,9 +44,9 @@ require("api/getShop.php");
                                 <div class="shop-location shop-contact-info">
 <!--                                     <i class="fa fa-dollar-sign shop-profile-icon" aria-hidden="true"></i> -->                                     <b><?php echo $titleArray['exchange'];?></b>:
                                         <?php 
-                                        echo $shopRecord->firstNum." <i class='far fa-heart text-danger'></i> <i class='fas fa-exchange-alt'></i> ".$shopRecord->firstDiscount."%";
+                                        echo $shopRecord->firstNum." <i class='fas fa-heart text-danger'></i> <i class='fas fa-exchange-alt'></i> ".$shopRecord->firstDiscount."%";
                                         if(!empty($shopRecord->secondDiscount)){
-                                          echo "&nbsp;&nbsp;&nbsp;".$shopRecord->secondNum." <i class='far fa-heart text-danger'></i> <i class='fas fa-exchange-alt'></i> ".$shopRecord->secondDiscount."%";
+                                          echo "&nbsp;&nbsp;&nbsp;".$shopRecord->secondNum." <i class='fas fa-heart text-danger'></i> <i class='fas fa-exchange-alt'></i> ".$shopRecord->secondDiscount."%";
                                         }
                                      ?>
                                 </div>                                 

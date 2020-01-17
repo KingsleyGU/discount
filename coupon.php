@@ -39,7 +39,7 @@ require("api/getCoupon.php");
             </div>
             <div class="container">
               <p class="promo-code"><?php echo $titleArray['coupon_number'];?>: <span class="promo"><?php echo $shopId.$couponUser.date_format(date_create($couponDate), 'YmdH-i-s');?></span></p>
-              <p class="expire-code"><?php echo $titleArray['valida_to'];?>: <span class="promo"><?php echo date('Y F j,',strtotime($couponDate."+7 day"));?> 23:59:59</span></p>             
+              <p class="expire-code"><?php echo $titleArray['valida_to'];?>: <span class="promo"><?php echo date('Y F j,',strtotime($couponDate."+30 day"));?> 23:59:59</span></p>             
             </div>
           </div>
     <?php 

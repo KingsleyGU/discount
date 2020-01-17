@@ -1,17 +1,6 @@
-<?PHP
-$sender = 'coolpanda@coolpanda.dk';
-$recipient = 'gumin12150454x@gmail.com';
+<?php
 
-$subject = "php mail test";
-$message = "php test message";
-$headers = 'From:' . $sender;
+// Show all information, defaults to INFO_ALL
+phpinfo();
 
-if (mail($recipient, $subject, $message, $headers))
-{
-    echo "Message accepted";
-}
-else
-{
-    echo "Error: Message not accepted";
-}
 ?>

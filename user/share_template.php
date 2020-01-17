@@ -36,7 +36,7 @@
         </div>
         <div class="share-contact-info">
           <a href="details.php?shopId=${data.shopId}" class="author-name" target="_blank">
-            <i class="fa fa-store-alt shop-profile-icon" aria-hidden="true"></i>${data.shopName}
+            <i class="fa fa-store-alt shop-profile-icon" aria-hidden="true"></i>${data.shopName_UK}
           </a>
         </div>
         <div class="share-contact-info">

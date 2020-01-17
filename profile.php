@@ -113,7 +113,7 @@ require("api/getUserInfo.php");
   <section class="page-section" style="border-top: solid 5px #da452d; padding: 60px 0px;">
   	<?php include 'user/share_template.php';?>	
   </section>
-<?php if(!empty($_SESSION['userId']&&$_SESSION['userId']==$userId)&&$couponRows > 0){?>
+<?php if(isCurrentUser($userId)&&$couponRows > 0){?>
   <section id="coupon-section" style="border-top: solid 5px #da452d; padding: 60px;">
 	<div class="container inner ">
          	<h2 style="text-align: center; line-height: 50px;"><?php 
@@ -123,7 +123,8 @@ require("api/getUserInfo.php");
 			<table class="table col-lg-12">
 			  <thead>
 			    <tr>
-			      <th scope="col">Name</th>
+			      <th scope="col" >Name</th>
+			      <th scope="col">Status</th>
 			      <th scope="col">Action</th>
 			    </tr>
 			  </thead>
@@ -145,24 +146,21 @@ require("api/getUserInfo.php");
 		        ?>
 			    <tr>
 
-			      <td><?php  echo $couponRecord->shopName;?></td>
-			      <td><?php  
-			      if($status ==1||$status==2)
+			      <td width="40%"><?php  echo $couponRecord->shopName;?></td>
+			      <td width="30%"><?php  
+			      if($status ==1)
 			      {
-              ?>
-              <a href="coupon.php?couponId=<?php echo $couponRecord->id;?>" class="btn btn-secondary">VIEW</a>
-            <?php 		      	
+			      	echo "<span class='badge badge-secondary'>expired</span>";
 			      }
-            else
+            elseif($status ==2)
             {
-            ?>
-            <a href="coupon.php?couponId=<?php echo $couponRecord->id;?>" class="btn btn-success">VIEW</a>
-
-            <?php
-              
+              echo "<span class='badge badge-secondary'>used</span>";
+            }
+			      else{
+			      	echo "<span class='badge badge-success'>valid</span>";
 			      }
 			      ?></td>
-			      <td></td>
+			      <td width="30%"><a href="coupon.php?couponId=<?php echo $couponRecord->id;?>" class="btn btn-light">VIEW</a></td>
 			    </tr>
 		        <?php
 		        	$row = $row +1;
