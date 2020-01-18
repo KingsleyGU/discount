@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 require("api/dbconnection.php");
 $errorMessage = "";
@@ -31,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $_SESSION["email"] = $email;
             $_SESSION["phone"] = $phone;
             $_SESSION["userId"] = mysqli_insert_id($conn);
-            header("Location: index.php");
+            header("Location: index.php");  
         }
   }
 }

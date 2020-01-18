@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 require("api/getShop.php");
 ?>  
 <?php  include 'user/header.php';?> 

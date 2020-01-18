@@ -27,7 +27,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $_SESSION["email"] = $email;
     $_SESSION["phone"] = $userRecord->phone;
     $_SESSION["userId"] = $userRecord->id;
-    header("Location: index.php");    
+    if(!empty($_SESSION['current_page'])){
+      header("Location: ".$_SESSION['current_page']);
+    }
+    else{
+      header("Location: index.php");  
+    }    
    }
   else{
     $errorMessage = "User name or password is not correct";

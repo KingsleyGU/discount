@@ -3,6 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
+$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 require("api/getUserInfo.php");
 ?>
 <?php include 'user/header.php';?>  
