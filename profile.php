@@ -3,7 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
-$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 require("api/getUserInfo.php");
 ?>
 <?php include 'user/header.php';?>  
@@ -26,6 +25,8 @@ require("api/getUserInfo.php");
       </div>
       <div class="user-change-trigger">
       	<h2 class=" user-profile-content"><?php echo $userRecord->name; ?></h2>
+        <p><?php echo $titleArray['remaining'];?><i class='fas fa-heart text-danger'></i> :<?php echo $userRecord->spare_likes;?></p>
+
       	<form action="api/userProfile.php" method="post" class="user-profile-form">
 			<input type="hidden" name="userId" value="<?php echo $userId;?>"/>
 			<input type="hidden" name="fieldId" value="1"/>
@@ -74,7 +75,7 @@ require("api/getUserInfo.php");
 <?php 
    if($subscribeRows > 0){
 ?>
-  <section id="subscription-section" style="padding:50px 0px;">
+  <section id="subscription-section" style="padding:50px 0px; display:none;">
   <div class="container">
          <h2 style="text-align: center; line-height: 50px;  ">
           <?php	echo $titleArray['subscription']; ?>

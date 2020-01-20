@@ -29,6 +29,10 @@ require("api/getShare.php");
   }
   
   $shopId = $share['shopId'];
+  $userId = "";
+  if(!empty($_SESSION['userId'])){
+    $userId = $_SESSION['userId'];
+  }
 ?>
               <div class="portfolio-modal modal fade" id="share-modal" tabindex="-1" role="dialog"  aria-hidden="true">
               <div class="modal-dialog modal-xl text-center" role="document">
@@ -80,6 +84,46 @@ require("api/getShare.php");
             </div>
 
 
+    <div class="portfolio-modal modal fade" id="donate-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal-dialog " role="document">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">
+              <i class="fas fa-times"></i>
+            </span>
+          </button>
+          <div class="modal-body text-center">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                <h3 class="portfolio-modal-title mb-0">Donate Likes</h3>
+                  <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon">
+                      <i class="fas fa-fish"></i>
+                    </div>
+                    <div class="divider-custom-line"></div>
+                  </div>
+
+                  <p class="text-left" style="font-weight: bold; width: 100%;">You currently can maxium donate <?php echo $share['spare_likes'];?> <i class='fas fa-heart text-danger'></i></p>
+                  <form class="share-form" method="post" action="api/createMultipleLikes.php"  > 
+                    <input type="hidden" name="userId" value="<?php echo $userId;?>">
+                    <input type="hidden" name="shareId" value="<?php echo $_GET['shareId'];?>">
+                      <div class="wrap-input100 validate-input m-b-30" data-validate="Enter like number">
+                          <input name="likeNum" class="input100" type="number" min="1" max="<?php echo $share['spare_likes'];?>" required/>
+                        <span class="focus-input100" data-placeholder="How many likes:*"></span>
+                      </div> 
+                    <input type="submit" class="login100-form-btn m-t-20" value="<?php echo $titleArray['continue'];?>">
+                  </form>             
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   <section class="masthead share-section page-section" id="about">
         <div class="container">
         	<h1 class="text-center share-head"><?php echo $titleArray['like_my_post']." ";?><?php
@@ -103,6 +147,9 @@ require("api/getShare.php");
                <div class="text-center" style="width:100%; margin: 20px;">
                   <p class="text-center" style="font-weight: bold; margin-bottom: 0px; ">
                     <span class="like-image unfollow-image" data-toggle="modal" data-target="#share-modal" style="margin-top:0px;"><i class="fas fa-share-square"></i></span>
+                    <?php if(isCurrentUser($share['userId'])&&(((int) $share['spare_likes'])>0)) { ?>
+                    <span class="like-image unfollow-image" data-toggle="modal" data-target="#donate-modal" style="margin-top:0px;">Donate <i class='far fa-heart'></i></span>
+                    <?php }?>
                   </p>
                 </div>
                 <?php if(isCurrentUser($share['userId'])) {
@@ -204,7 +251,13 @@ $( document ).ready(function() {
  function like(selector,e,shareId) {
       e.preventDefault();
       var userProfile = getUserProfile();
-      $.post( "api/createLike.php", { shareId: shareId, userProfile: userProfile})
+      var userId = "<?php echo $userId; ?>";
+      var ownerId = "<?php echo $share['userId']; ?>";
+      if(userId==ownerId)
+      {
+        userId="";
+      }
+      $.post( "api/createLike.php", { shareId: shareId, userProfile: userProfile, userId : userId})
       .done(function(){  
       	location.reload();    
       })  

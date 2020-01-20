@@ -142,7 +142,7 @@
           {
           ?>
           <li class="nav-item mx-lg-1">
-                  <a class="nav-link px-0 px-lg-3 rounded js-scroll-trigger" href="profile.php?userId=<?php echo $_SESSION['userId'];?>" style="min-width:80px; display: inline-block; text-align: center;"><?php echo $titleArray['me'];?></a> 
+                  <a class="btn alt header-btn sign-btn" href="profile.php?userId=<?php echo $_SESSION['userId'];?>"><?php echo $titleArray['me'];?></a> 
           </li>
           <li class="nav-item mx-lg-1">
                   <a href="login.php" class="btn alt  header-btn"><?php echo $titleArray['logout'];?></a>

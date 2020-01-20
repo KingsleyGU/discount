@@ -4,6 +4,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$shareId = $_REQUEST["shareId"];
 	$userProfile = $_REQUEST["userProfile"];
 	$created_time = date("Y-m-d H:i:s");
+	$userId = $_REQUEST["userId"];
 	$validateQuery = "select * from shareLikes where userProfile = '$userProfile' and DATE(created_date)=DATE(NOW()) and shareId = '$shareId'";
 	$result = $conn->query($validateQuery);
 	if($result->num_rows > 0){
@@ -13,7 +14,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$insertQuery = "INSERT into `shareLikes` (shareId, userProfile,created_date)
 		    VALUES ($shareId, '$userProfile','$created_time')";
 		if ($conn->query($insertQuery) === TRUE) {
-		    echo "success";
+			if(!empty($userId)){
+				$sql = "update user set spare_likes=spare_likes+1 where id=".$userId;
+				$result = $result = $conn->query($sql);
+			}  
+		  	echo "success";
 		}
 	}
 }

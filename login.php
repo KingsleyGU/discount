@@ -22,16 +22,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   $rows = mysqli_num_rows($result);
   if($rows==1){
     $userRecord = mysqli_fetch_object($result);
-
     $_SESSION["name"] = $userRecord->name;
     $_SESSION["email"] = $email;
     $_SESSION["phone"] = $userRecord->phone;
     $_SESSION["userId"] = $userRecord->id;
+    $spare_likes = (int) $userRecord->spare_likes;
+    $last_login_time = $userRecord->last_login_time;
+    $today = date("Y-m-d");
+    if(date("Y-m-d",strtotime($last_login_time))<$today){
+      $trn_date = date("Y-m-d H:i:s");
+      $sql = "update user set spare_likes=".($spare_likes+5).", last_login_time='".$trn_date."' where id=".$userRecord->id;
+      $result = mysqli_query($conn,$sql) or die(mysql_error());
+    }
+
+
     if(!empty($_SESSION['current_page'])){
-      header("Location: ".$_SESSION['current_page']);
+       header("Location: ".$_SESSION['current_page']);
     }
     else{
-      header("Location: index.php");  
+       header("Location: index.php");  
     }    
    }
   else{
