@@ -12,7 +12,7 @@ if(!empty($_GET['shopId']))
 }
 if(!empty($_GET['categoryId'])&&$_GET['categoryId']==2)
 {
-	$sql = $sql." order by shareLikeCount DESC";
+	$sql = $sql." where shares.created_time >= DATE_SUB(NOW(), INTERVAL 3 DAY) order by shareLikeCount DESC";
 }
 else{
 $sql = $sql." order by shares.created_time DESC";

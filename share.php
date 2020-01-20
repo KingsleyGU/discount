@@ -96,7 +96,7 @@ require("api/getShare.php");
             <div class="container">
               <div class="row justify-content-center">
                 <div class="col-lg-8">
-                <h3 class="portfolio-modal-title mb-0">Donate Likes</h3>
+                <h3 class="portfolio-modal-title mb-0">Remaining Likes</h3>
                   <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon">
@@ -105,7 +105,7 @@ require("api/getShare.php");
                     <div class="divider-custom-line"></div>
                   </div>
 
-                  <p class="text-left" style="font-weight: bold; width: 100%;">You currently can maxium donate <?php echo $share['spare_likes'];?> <i class='fas fa-heart text-danger'></i></p>
+                  <p style="font-weight: bold; width: 100%;"><?php echo $titleArray['danate_notice'];?> <?php echo $share['spare_likes'];?> <i class='fas fa-heart text-danger'></i></p>
                   <form class="share-form" method="post" action="api/createMultipleLikes.php"  > 
                     <input type="hidden" name="userId" value="<?php echo $userId;?>">
                     <input type="hidden" name="shareId" value="<?php echo $_GET['shareId'];?>">
